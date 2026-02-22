@@ -1,54 +1,55 @@
 <!-- =======================================
-     SCENE 3 -- LinkedIn · Type B
+     SCENE 3 -- LinkedIn · Type C
 ======================================= -->
 <div class="scene scene-light" id="s3">
-  <div class="s3-layout">
-    <div class="s3-win">
-      <div class="window-chrome" style="background:#E8E4DC;border-color:#D8D4CC;">
-        <div class="dot" style="background:#C8A0A0;"></div><div class="dot" style="background:#C8C0A0;"></div><div class="dot" style="background:#A8C0A8;"></div>
-        <div style="flex:1;background:#DDDAD2;border-radius:5px;padding:5px 12px;font-size:11px;color:#777;margin-left:8px;">linkedin.com/in/jake-l./connections</div>
-      </div>
-      <div class="s3-li-head">
-        <div class="s3-logo">in</div>
-        <div class="s3-search">
-          <span style="font-size:10px;color:#888;">&#128269;</span>
-          <span style="font-size:12px;color:#777;">Sequoia Capital investor</span>
-        </div>
-      </div>
-      <div class="s3-body">
-        <div class="s3-left">
-          <div class="s3-avatar">JL</div>
-          <div class="s3-name">Jake L.</div>
-          <div class="s3-title">Founder (2x) &middot; Angel Investor</div>
-          <div class="s3-div"></div>
-          <div class="s3-stat"><span class="s3-sl">Connections</span><span class="s3-sv">500+</span></div>
-          <div class="s3-stat"><span class="s3-sl">Mutual</span><span class="s3-sv">47</span></div>
-          <div class="s3-stat"><span class="s3-sl">Path to gold</span><span class="s3-sv">???</span></div>
-        </div>
-        <div class="s3-conns">
-          <div class="s3-ch"><span>Jake's connections</span><span style="font-size:10px;color:#AAA;">500+ -- no signal</span></div>
-          <div class="s3-row"><div class="s3-av">RB</div><div><div class="s3-cn">Ron B.</div><div class="s3-ct">Managing Partner &middot; Fund</div><div class="s3-cm">3 mutual</div></div><div class="s3-ca">Connect</div></div>
-          <div class="s3-row"><div class="s3-av">SM</div><div><div class="s3-cn">Sarah M.</div><div class="s3-ct">Investor &middot; Palo Alto</div><div class="s3-cm">1 mutual</div></div><div class="s3-ca">Connect</div></div>
-          <div class="s3-row"><div class="s3-av">TK</div><div><div class="s3-cn">Tom K.</div><div class="s3-ct">Product Manager &middot; Startup</div><div class="s3-cm">12 mutual</div></div><div class="s3-ca">Connect</div></div>
-          <div class="s3-row"><div class="s3-av">JW</div><div><div class="s3-cn">James W.</div><div class="s3-ct">VC Associate &middot; SF</div><div class="s3-cm">2 mutual</div></div><div class="s3-ca">Connect</div></div>
-          <div class="s3-row"><div class="s3-av">AL</div><div><div class="s3-cn">Amy L.</div><div class="s3-ct">Founder &middot; B2B SaaS</div><div class="s3-cm">8 mutual</div></div><div class="s3-ca">Connect</div></div>
-          <div style="text-align:center;padding:10px;font-size:10px;color:#AAA;font-style:italic;">490 more... same opaque list</div>
-        </div>
+  <!-- End cap phrase placed FIRST so CSS sibling selector can target .s3-win -->
+  <div class="phrase s3-endcap" id="s3p3">
+    <div class="s3-ec-txt">500 connections.</div>
+    <div class="s3-ec-sub">Zero signal.</div>
+  </div>
+  <div class="s3-win">
+    <div class="window-chrome" style="background:#E8E4DC;border-color:#D8D4CC;">
+      <div class="dot" style="background:#C8A0A0;"></div><div class="dot" style="background:#C8C0A0;"></div><div class="dot" style="background:#A8C0A8;"></div>
+      <div style="flex:1;background:#DDDAD2;border-radius:5px;padding:5px 12px;font-size:11px;color:#777;margin-left:8px;">linkedin.com/in/jake-l./connections</div>
+    </div>
+    <div class="s3-li-head">
+      <div class="s3-logo">in</div>
+      <div class="s3-search">
+        <span style="font-size:10px;color:#888;">&#128269;</span>
+        <span style="font-size:12px;color:#777;">Sequoia Capital investor</span>
       </div>
     </div>
-    <div class="s3-side" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="phrase" id="s3p0">
-        <div class="phrase-eye">What I saw</div>
-        <div class="phrase-txt">500 connections. <b>All familiar.</b></div>
+    <div class="s3-body">
+      <div class="s3-left">
+        <div class="s3-avatar"><img src="https://randomuser.me/api/portraits/men/30.jpg" alt=""></div>
+        <div class="s3-name">Jake L.</div>
+        <div class="s3-title">Founder (2x) &middot; Angel Investor</div>
+        <div class="s3-div"></div>
+        <div class="s3-stat"><span class="s3-sl">Connections</span><span class="s3-sv">500+</span></div>
+        <div class="s3-stat"><span class="s3-sl">Mutual</span><span class="s3-sv">47</span></div>
+        <div class="s3-stat"><span class="s3-sl">Path to gold</span><span class="s3-sv">???</span></div>
       </div>
-      <div class="phrase" id="s3p1">
-        <div class="phrase-eye">The realization</div>
-        <div class="phrase-txt">I had hit my <span class="g">network's limits</span>.</div>
+      <div class="s3-conns">
+        <div class="s3-ch"><span>Jake's connections</span><span style="font-size:10px;color:#AAA;font-weight:400;">500+ &mdash; no signal</span></div>
+        <div class="s3-row"><div class="s3-av"><img src="https://randomuser.me/api/portraits/men/45.jpg" alt=""></div><div><div class="s3-cn">Ron B.</div><div class="s3-ct">Managing Partner &middot; Fund</div><div class="s3-cm">3 mutual</div></div><div class="s3-ca">Connect</div></div>
+        <div class="s3-row"><div class="s3-av"><img src="https://randomuser.me/api/portraits/women/23.jpg" alt=""></div><div><div class="s3-cn">Sarah M.</div><div class="s3-ct">Investor &middot; Palo Alto</div><div class="s3-cm">1 mutual</div></div><div class="s3-ca">Connect</div></div>
+        <div class="s3-row"><div class="s3-av"><img src="https://randomuser.me/api/portraits/men/12.jpg" alt=""></div><div><div class="s3-cn">Tom K.</div><div class="s3-ct">Product Manager &middot; Startup</div><div class="s3-cm">12 mutual</div></div><div class="s3-ca">Connect</div></div>
+        <div class="s3-row"><div class="s3-av"><img src="https://randomuser.me/api/portraits/men/55.jpg" alt=""></div><div><div class="s3-cn">James W.</div><div class="s3-ct">VC Associate &middot; SF</div><div class="s3-cm">2 mutual</div></div><div class="s3-ca">Connect</div></div>
+        <div class="s3-row"><div class="s3-av"><img src="https://randomuser.me/api/portraits/women/67.jpg" alt=""></div><div><div class="s3-cn">Amy L.</div><div class="s3-ct">Founder &middot; B2B SaaS</div><div class="s3-cm">8 mutual</div></div><div class="s3-ca">Connect</div></div>
+        <div style="text-align:center;padding:12px;font-size:10px;color:#AAA;font-style:italic;">490 more... same opaque list</div>
       </div>
-      <div class="phrase" id="s3p2">
-        <div class="phrase-eye">The trap</div>
-        <div class="phrase-txt"><b>No path out.</b></div>
-      </div>
+    </div>
+  </div>
+  <div class="narrator-card" id="s3-card">
+    <div class="nc-header"><div class="nc-pulse"></div><div class="nc-label">LinkedIn &middot; the problem</div></div>
+    <div class="phrase" id="s3p0">
+      <div class="phrase-txt">500 connections. <b>All familiar.</b></div>
+    </div>
+    <div class="phrase" id="s3p1">
+      <div class="phrase-txt">I had hit my <span class="g">network's limits</span>.</div>
+    </div>
+    <div class="phrase" id="s3p2">
+      <div class="phrase-txt"><b>No path out.</b></div>
     </div>
   </div>
 </div>
