@@ -40,6 +40,7 @@ body {
   transition:opacity 0.45s ease;
 }
 .scene.active { opacity:1; pointer-events:auto; }
+.scene.no-fade { transition:none !important; }
 
 /* ---------------------------------------------
    TYPE A -- WORD HIGHLIGHT

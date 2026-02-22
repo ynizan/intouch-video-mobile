@@ -238,6 +238,17 @@ function tick(ts) {
   const si = sceneIndexAt(elapsed);
   // Scene just changed -- start its audio
   if(si !== lastSceneIndex) {
+    // Seamless (no-fade) transition from s8 to s9
+    const s8El = document.getElementById('s8');
+    const s9El = document.getElementById('s9');
+    if(lastSceneIndex === 7 && si === 8 && s8El && s9El) {
+      s8El.classList.add('no-fade');
+      s9El.classList.add('no-fade');
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        s8El.classList.remove('no-fade');
+        s9El.classList.remove('no-fade');
+      }));
+    }
     lastSceneIndex = si;
     playSceneAudio(SCENES[si]);
   }
