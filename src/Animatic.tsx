@@ -15,7 +15,7 @@ import { S10Counter } from "./scenes/S10Counter";
 import { S11EndCard } from "./scenes/S11EndCard";
 
 // Background music toggle — set to true once audio/music.mp3 is placed in public/audio/
-const MUSIC_ENABLED = false;
+const MUSIC_ENABLED = true;
 
 // Calculate cumulative start frames
 const startFrames: number[] = [];
