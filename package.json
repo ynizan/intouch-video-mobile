@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "InTouch pitch animatic -- Remotion composition",
   "scripts": {
+    "build": "bash build.sh",
     "preview": "npx remotion preview src/index.tsx",
     "render": "npx remotion render src/index.tsx Animatic out/animatic.mp4",
-    "setup-audio": "mkdir -p public/audio && cp audio/*.mp3 public/audio/"
+    "setup-audio": "mkdir -p public/audio && cp audio/*.mp3 public/audio/",
+    "pages:deploy": "npx wrangler pages deploy dist",
+    "pages:deploy:preview": "npx wrangler pages deploy dist --branch preview"
   },
   "dependencies": {
     "remotion": "^4.0.250",
