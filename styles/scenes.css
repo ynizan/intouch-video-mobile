@@ -323,35 +323,37 @@
   transition:opacity 0.5s ease;
 }
 
-/* Big text overlays */
+/* Big text overlays -- floating card near top, over address bar area */
 .s6-bigtext {
   position:absolute;
-  left:0; right:0; top:50%; transform:translateY(-50%);
+  left:50%; top:18px; transform:translateX(-50%) translateY(0);
   text-align:center; z-index:15; pointer-events:none;
-  padding:28px 40px 32px;
-  background:rgba(238,240,245,0.88);
-  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-  box-shadow:0 8px 48px rgba(0,0,0,0.09);
-  opacity:0; transition:opacity 0.5s ease, transform 0.5s ease;
+  padding:14px 36px 16px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-radius:12px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
+  border:1px solid rgba(212,165,116,0.18);
+  opacity:0; transition:opacity 0.45s ease, transform 0.45s ease;
 }
 .s6-bigtext.visible {
-  opacity:1;
+  opacity:1; transform:translateX(-50%) translateY(0);
 }
 .s6-bigtext.exit {
-  opacity:0; transform:translateY(calc(-50% - 20px));
+  opacity:0; transform:translateX(-50%) translateY(-12px);
 }
 .s6-bt-label {
-  font-size:10px; font-weight:800; letter-spacing:0.16em;
-  text-transform:uppercase; color:#A0AEC0; margin-bottom:14px;
+  font-size:9px; font-weight:800; letter-spacing:0.16em;
+  text-transform:uppercase; color:#A0AEC0; margin-bottom:8px;
 }
 .s6-bt-main {
   font-family:'Manrope',sans-serif; font-weight:800;
-  font-size:42px; line-height:1.25; color:#2D3748;
-  letter-spacing:-0.03em;
+  font-size:28px; line-height:1.3; color:#2D3748;
+  letter-spacing:-0.02em;
 }
 .s6-bt-gold {
   color:var(--gold); display:inline;
-  text-shadow:0 0 48px rgba(212,165,116,0.35);
+  text-shadow:0 0 32px rgba(212,165,116,0.3);
 }
 
 /* S6 narrator card override (light theme like S2) */
