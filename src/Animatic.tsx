@@ -1,6 +1,6 @@
 import React from "react";
-import { Audio, Sequence, staticFile } from "remotion";
-import { SCENE_FRAMES } from "./Root";
+import { Audio, Sequence, staticFile, interpolate } from "remotion";
+import { SCENE_FRAMES, TOTAL_FRAMES } from "./Root";
 
 import { S01Opening } from "./scenes/S01Opening";
 import { S02Calendar } from "./scenes/S02Calendar";
@@ -38,7 +38,16 @@ export function Animatic() {
     >
       {/* Background music */}
       {MUSIC_ENABLED && (
-        <Audio src={staticFile("audio/music.mp3")} volume={0.25} />
+        <Audio
+          src={staticFile("audio/music.mp3")}
+          volume={(f) => {
+            const FADE = 30; // 1s at 30fps
+            const MAX = 0.25;
+            if (f < FADE) return interpolate(f, [0, FADE], [0, MAX]);
+            if (f > TOTAL_FRAMES - FADE) return interpolate(f, [TOTAL_FRAMES - FADE, TOTAL_FRAMES], [MAX, 0]);
+            return MAX;
+          }}
+        />
       )}
 
       {/* S1 — Opening */}
