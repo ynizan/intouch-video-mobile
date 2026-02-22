@@ -50,6 +50,8 @@ function scale() {
   canvas.style.marginLeft = ml+'px';
   controls.style.marginLeft = ml+'px';
   voBar.style.marginLeft = ml+'px';
+  const s2sub = document.getElementById('s2-subbar');
+  if(s2sub) { s2sub.style.width = W+'px'; s2sub.style.marginLeft = ml+'px'; }
 }
 window.addEventListener('resize', scale);
 
@@ -116,6 +118,10 @@ function render() {
   document.querySelectorAll('.scene').forEach((el,i)=>{
     el.classList.toggle('active', i===si);
   });
+
+  // S2 subtitle bar — show only during S2
+  const s2sub = document.getElementById('s2-subbar');
+  if(s2sub) s2sub.classList.toggle('s2sub-visible', si===1);
 
   // Type A -- words
   if(sc.type==='A' && sc.words.length) {

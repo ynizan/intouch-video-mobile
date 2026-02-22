@@ -274,3 +274,48 @@ body {
   text-align:center; letter-spacing:0.01em;
 }
 #vo-text .vo-hl { font-style:normal; font-family:'Manrope',sans-serif; font-weight:800; color:var(--gold) !important; }
+
+/* ---------------------------------------------
+   S2 SUBTITLE BAR (outside canvas, brand-styled)
+   Readable at any viewport size — not scaled
+--------------------------------------------- */
+#s2-subbar {
+  display:none;
+  background:rgba(238,234,226,0.98);
+  border-top:1px solid rgba(212,165,116,0.25);
+  border-bottom:1px solid rgba(212,165,116,0.1);
+  padding:10px 20px 13px;
+  flex-shrink:0;
+}
+#s2-subbar.s2sub-visible { display:block; }
+
+.s2sub-header {
+  display:flex; align-items:center; gap:7px; margin-bottom:7px;
+}
+.s2sub-pulse {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--gold); box-shadow:0 0 6px rgba(212,165,116,0.55);
+  flex-shrink:0;
+}
+.s2sub-label {
+  font-size:9px; font-weight:800; letter-spacing:0.12em;
+  text-transform:uppercase; color:rgba(212,165,116,0.7);
+}
+
+/* Reset phrase box styles inside subtitle bar */
+#s2-subbar .phrase {
+  margin-bottom:0; padding:0; border-left:none; border-radius:0;
+  background:transparent !important;
+}
+#s2-subbar .phrase.active { border-left:none; background:transparent !important; }
+#s2-subbar .phrase-eye { display:none; }
+#s2-subbar .phrase-txt {
+  font-family:'IBM Plex Serif',serif; font-style:italic;
+  font-size:15px; line-height:1.6; color:var(--ink-light);
+}
+#s2-subbar .phrase-txt b  { font-style:normal; font-weight:700; color:var(--ink); }
+#s2-subbar .phrase-txt em { font-style:normal; font-weight:700; color:var(--ink); }
+#s2-subbar .phrase-txt .g {
+  font-style:normal; font-family:'Manrope',sans-serif;
+  font-weight:800; color:var(--gold); font-size:15px;
+}
