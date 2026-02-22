@@ -1,22 +1,8 @@
 {
   "name": "intouch-animatic",
   "version": "1.0.0",
-  "description": "InTouch pitch animatic -- Remotion composition",
+  "description": "InTouch pitch animatic -- static HTML player",
   "scripts": {
-    "build": "python3 build.py",
-    "preview": "npx remotion preview src/index.tsx",
-    "render": "npx remotion render src/index.tsx Animatic out/animatic.mp4",
-    "setup-audio": "mkdir -p public/audio && cp audio/*.mp3 public/audio/"
-  },
-  "dependencies": {
-    "remotion": "^4.0.250",
-    "@remotion/player": "^4.0.250",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.3.3",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0"
+    "build": "node build.js"
   }
 }
