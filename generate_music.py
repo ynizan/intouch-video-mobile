@@ -2,224 +2,272 @@
 """
 Generate background music for the InTouch animatic.
 
-Primary method: Procedural synthesis (numpy/scipy) — works fully offline.
-  Produces a 85-second ambient pad track in C major (C–Am–F–G progression),
-  suitable as subtle background music at volume 0.25.
+Arc: slow ambient intro → builds midway → uplifting energetic finish.
 
-Alternative: MusicGen via HuggingFace transformers (requires internet access).
-  Uncomment the USE_MUSICGEN block below after running:
-    pip3 install transformers accelerate
+  0 – 38s   Ambient pads only (long, soft chords)
+  38 – 55s  Pads + gentle quarter-note arpeggio (building momentum)
+  55 – 85s  Pads + bright 8th-note arpeggio + high melody (uplifting payoff)
 
 Output:
     audio/music.mp3         (85 seconds, 128kbps MP3)
     public/audio/music.mp3  (copy for Remotion preview)
 
-Re-run anytime to regenerate. Edit CHORD_PROGRESSION or BPM to change style.
+Re-run any time to regenerate.
 """
 
-import os
-import shutil
-import sys
-
+import os, shutil
 import numpy as np
 import scipy.io.wavfile
 from pydub import AudioSegment
 
 SR          = 44100
-BPM         = 72
-BEAT_SEC    = 60.0 / BPM          # ~0.833s
-CHORD_SEC   = BEAT_SEC * 4        # one chord = 4 beats = ~3.33s
 TARGET_SEC  = 85.0
-GEN_SEC     = TARGET_SEC + 4      # generate slightly longer, then trim
+GEN_SEC     = TARGET_SEC + 3      # generate a bit long, trim at export
+BPM         = 90                   # underlying tempo (supports arpeggios)
+BEAT        = 60.0 / BPM          # ~0.667s
+CHORD_BEATS = 8                    # 8 beats per chord = ~5.3s (slow feel in section A)
 
-OUTPUT_MP3  = "audio/music.mp3"
-PUBLIC_MP3  = "public/audio/music.mp3"
-TMP_WAV     = "/tmp/music_raw.wav"
+OUTPUT_MP3 = "audio/music.mp3"
+PUBLIC_MP3 = "public/audio/music.mp3"
+TMP_WAV    = "/tmp/music_raw.wav"
 
-# ------------------------------------------------------------------
-# NOTE UTILITIES
-# ------------------------------------------------------------------
+# ── NOTE UTILITIES ──────────────────────────────────────────────────────────
 
-_NOTE_SEMITONES = {
-    'C': 0, 'C#': 1, 'Db': 1, 'D': 2, 'D#': 3, 'Eb': 3,
-    'E': 4, 'F': 5, 'F#': 6, 'Gb': 6, 'G': 7, 'G#': 8,
-    'Ab': 8, 'A': 9, 'A#': 10, 'Bb': 10, 'B': 11,
+_SEMITONES = {
+    'C':0,'C#':1,'Db':1,'D':2,'D#':3,'Eb':3,'E':4,'F':5,
+    'F#':6,'Gb':6,'G':7,'G#':8,'Ab':8,'A':9,'A#':10,'Bb':10,'B':11,
 }
 
-def note_freq(name: str) -> float:
-    """Convert note name like 'C4' or 'F#3' to Hz."""
-    # Handle sharps/flats before the octave digit
-    if len(name) == 2:
-        note, octave = name[0], int(name[1])
-    else:
-        note, octave = name[:2], int(name[2])
-    midi = 12 * (octave + 1) + _NOTE_SEMITONES[note]
+def freq(name: str) -> float:
+    note   = name[:-1]
+    octave = int(name[-1])
+    midi   = 12 * (octave + 1) + _SEMITONES[note]
     return 440.0 * 2.0 ** ((midi - 69) / 12.0)
 
+# ── SYNTHESIS PRIMITIVES ─────────────────────────────────────────────────────
 
-# ------------------------------------------------------------------
-# SYNTHESIS PRIMITIVES
-# ------------------------------------------------------------------
+def sine(f: float, n_samples: int, phase=0.0) -> np.ndarray:
+    t = np.arange(n_samples) / SR
+    return np.sin(2 * np.pi * f * t + phase)
 
-HARMONICS_PAD   = [(1, 1.0), (2, 0.45), (3, 0.20), (4, 0.10), (5, 0.04)]
-HARMONICS_BASS  = [(1, 1.0), (2, 0.30), (3, 0.08)]
+def pad_tone(f: float, n: int, atk=0.4, rel=0.6, harmonics=None) -> np.ndarray:
+    """Warm, slightly detuned pad tone."""
+    if harmonics is None:
+        harmonics = [(1, 1.0), (2, 0.35), (3, 0.15), (4, 0.06), (5, 0.02)]
+    # slight detune for chorus effect
+    wave = sum(amp * (sine(f * h, n) + 0.18 * sine(f * h * 1.003, n))
+               for h, amp in harmonics)
+    wave /= (1.18 * sum(a for _, a in harmonics))
 
-
-def synth_tone(freq: float, dur: float,
-               harmonics=HARMONICS_PAD,
-               attack=0.25, sustain_level=0.85, release=0.55) -> np.ndarray:
-    """Additive synthesis with ADSR envelope."""
-    n = int(SR * dur)
-    t = np.linspace(0, dur, n, endpoint=False)
-
-    wave = np.zeros(n)
-    for harmonic, amp in harmonics:
-        wave += amp * np.sin(2 * np.pi * freq * harmonic * t)
-
-    # Normalise
-    peak = np.max(np.abs(wave))
-    if peak > 0:
-        wave /= peak
-
-    # ADSR envelope
-    atk = min(int(SR * attack), n)
-    rel = min(int(SR * release), n - atk)
-    env = np.full(n, sustain_level)
-    env[:atk]  = np.linspace(0.0, sustain_level, atk)
-    env[-rel:] = np.linspace(sustain_level, 0.0, rel)
+    env = np.ones(n)
+    a = min(int(SR * atk), n)
+    r = min(int(SR * rel), n - a)
+    env[:a] = np.linspace(0, 1, a)
+    env[-r:] = np.linspace(1, 0, r)
     return wave * env
 
+def bright_tone(f: float, n: int, atk=0.01, rel=0.25) -> np.ndarray:
+    """Bright plucky tone for arpeggios / melody."""
+    harmonics = [(1, 1.0), (2, 0.6), (3, 0.35), (4, 0.18), (5, 0.08), (6, 0.03)]
+    wave = sum(amp * sine(f * h, n) for h, amp in harmonics)
+    wave /= sum(a for _, a in harmonics)
 
-def render_chord(note_names: list, dur: float, pad_vol=0.32, bass_vol=0.12) -> np.ndarray:
-    """Mix pad voices + bass root for one chord."""
-    n = int(SR * dur)
-    mix = np.zeros(n)
+    env = np.ones(n)
+    a = min(int(SR * atk), n)
+    r = min(int(SR * rel), n - a)
+    env[:a] = np.linspace(0, 1, a)
+    # exponential decay — pluck character
+    decay_n = n - a
+    if decay_n > 0:
+        decay = np.exp(-np.linspace(0, 5, decay_n))
+        env[a:] = decay
+    return wave * env
 
-    # Pad voices
-    for name in note_names:
-        tone = synth_tone(note_freq(name), dur, HARMONICS_PAD)
-        mix += tone * pad_vol
+def bass_tone(f: float, n: int) -> np.ndarray:
+    harmonics = [(1, 1.0), (2, 0.4), (3, 0.12)]
+    wave = sum(amp * sine(f * h, n) for h, amp in harmonics)
+    wave /= sum(a for _, a in harmonics)
 
-    # Bass: root note, one octave down
-    root_name = note_names[0]
-    octave = int(root_name[-1]) - 1
-    if octave >= 0:
-        bass_name = root_name[:-1] + str(octave)
-        bass_tone = synth_tone(note_freq(bass_name), dur, HARMONICS_BASS,
-                               attack=0.10, release=0.40)
-        mix += bass_tone * bass_vol
+    env = np.ones(n)
+    atk = min(int(SR * 0.06), n)
+    rel = min(int(SR * 0.5), n - atk)
+    env[:atk] = np.linspace(0, 1, atk)
+    env[-rel:] = np.linspace(1, 0, rel)
+    return wave * env
 
-    return mix
+# ── REVERB ──────────────────────────────────────────────────────────────────
 
+def reverb(sig: np.ndarray, wet=0.30) -> np.ndarray:
+    combs = [(29.7, 0.805), (37.1, 0.827), (41.1, 0.783), (43.7, 0.764)]
+    rev = np.zeros_like(sig, dtype=float)
+    for ms, decay in combs:
+        d = int(SR * ms / 1000)
+        r = sig.astype(float).copy()
+        for i in range(d, len(r)):
+            r[i] += r[i - d] * decay
+        rev += r
+    rev /= max(np.max(np.abs(rev)), 1e-9)
+    # simple allpass
+    d2 = int(SR * 0.005)
+    for i in range(d2, len(rev)):
+        rev[i] += -0.7 * rev[i - d2]
+    return sig.astype(float) * (1 - wet) + rev * wet
 
-# ------------------------------------------------------------------
-# REVERB  (Schroeder-style: 4 comb filters + 2 allpass)
-# ------------------------------------------------------------------
+# ── CHORD DEFINITIONS ────────────────────────────────────────────────────────
+# C – Am – F – G  (one full bar per chord in section A; half-bar in sections B/C)
 
-def _comb(signal: np.ndarray, delay_ms: float, decay: float) -> np.ndarray:
-    d = int(SR * delay_ms / 1000)
-    out = signal.copy()
-    for i in range(d, len(out)):
-        out[i] += out[i - d] * decay
-    return out
+CHORDS = {
+    'C':  {'pad': ['C3','G3','E4','G4'],  'bass': 'C2', 'arp': ['C4','E4','G4','C5']},
+    'Am': {'pad': ['A2','E3','C4','E4'],  'bass': 'A2', 'arp': ['A3','C4','E4','A4']},
+    'F':  {'pad': ['F2','C3','A3','C4'],  'bass': 'F2', 'arp': ['F3','A3','C4','F4']},
+    'G':  {'pad': ['G2','D3','B3','D4'],  'bass': 'G2', 'arp': ['G3','B3','D4','G4']},
+}
 
+PROGRESSION = ['C', 'Am', 'F', 'G']
 
-def _allpass(signal: np.ndarray, delay_ms: float, coeff: float) -> np.ndarray:
-    d = int(SR * delay_ms / 1000)
-    out = signal.copy()
-    for i in range(d, len(out)):
-        out[i] += -coeff * out[i - d] + coeff * out[i]
-    return out
+# ── SECTION BOUNDARIES ───────────────────────────────────────────────────────
 
+SEC_A_END   = 38.0   # pads only
+SEC_B_END   = 55.0   # pads + quarter arpeggio
+# SEC_C = 55 → 85s    pads + 8th arpeggio + high melody
 
-def add_reverb(signal: np.ndarray, wet=0.35) -> np.ndarray:
-    comb_params = [(29.7, 0.805), (37.1, 0.827), (41.1, 0.783), (43.7, 0.764)]
-    reverb = np.zeros_like(signal, dtype=float)
-    for delay_ms, decay in comb_params:
-        reverb += _comb(signal.astype(float), delay_ms, decay)
-    reverb = _allpass(reverb, 5.0, 0.7)
-    reverb = _allpass(reverb, 1.7, 0.7)
-    reverb /= max(np.max(np.abs(reverb)), 1e-9)
-    return signal.astype(float) * (1 - wet) + reverb * wet
+# ── TRACK BUILDER ────────────────────────────────────────────────────────────
 
+def make_track() -> np.ndarray:
+    total = int(SR * GEN_SEC)
+    track = np.zeros(total)
 
-# ------------------------------------------------------------------
-# CHORD PROGRESSION
-# ------------------------------------------------------------------
-
-# C major, A minor, F major, G major  (4 beats each)
-CHORD_PROGRESSION = [
-    ['C4', 'E4', 'G4'],    # I   – C major
-    ['A3', 'C4', 'E4'],    # vi  – A minor
-    ['F3', 'A3', 'C4'],    # IV  – F major
-    ['G3', 'B3', 'D4'],    # V   – G major
-]
-
-
-# ------------------------------------------------------------------
-# MAIN
-# ------------------------------------------------------------------
-
-def generate_track() -> np.ndarray:
-    total_samples = int(SR * GEN_SEC)
-    track = np.zeros(total_samples, dtype=float)
-    pos = 0
     chord_idx = 0
+    t = 0.0   # current time in seconds
 
-    while pos < total_samples:
-        notes   = CHORD_PROGRESSION[chord_idx % len(CHORD_PROGRESSION)]
-        samples_left = total_samples - pos
-        dur     = min(CHORD_SEC, samples_left / SR)
-        if dur < 0.05:
+    while t < GEN_SEC:
+        name = PROGRESSION[chord_idx % len(PROGRESSION)]
+        ch   = CHORDS[name]
+
+        # chord duration depends on section
+        if t < SEC_A_END:
+            chord_dur = BEAT * CHORD_BEATS        # ~5.3s — slow
+        elif t < SEC_B_END:
+            chord_dur = BEAT * 4                  # ~2.7s — half-bar
+        else:
+            chord_dur = BEAT * 4                  # ~2.7s same, but layer is busier
+
+        chord_dur = min(chord_dur, GEN_SEC - t)
+        if chord_dur < 0.05:
             break
+        cn = int(SR * chord_dur)
 
-        segment = render_chord(notes, dur)
-        end = min(pos + len(segment), total_samples)
-        track[pos:end] += segment[:end - pos]
-        pos += len(segment)
+        # ── PADS ──
+        pad_vol = 0.28 if t < SEC_B_END else 0.22  # pads sit back when arps enter
+        for note in ch['pad']:
+            seg = pad_tone(freq(note), cn, atk=0.5, rel=1.0) * pad_vol
+            write(track, t, seg)
+
+        # ── BASS ──
+        bass_vol = 0.14
+        bseg = bass_tone(freq(ch['bass']), cn) * bass_vol
+        write(track, t, bseg)
+
+        # ── QUARTER ARPEGGIO  (section B only) ──
+        if SEC_A_END <= t < SEC_B_END:
+            arp_notes = ch['arp']
+            step = BEAT  # one note per beat
+            for step_i in range(int(chord_dur / step)):
+                note_t = t + step_i * step
+                if note_t >= GEN_SEC:
+                    break
+                n2 = arp_notes[step_i % len(arp_notes)]
+                nn = min(int(SR * step * 0.85), int(SR * 0.5))
+                seg = bright_tone(freq(n2), nn, atk=0.01, rel=0.22) * 0.18
+                write(track, note_t, seg)
+
+        # ── 8TH ARPEGGIO + MELODY  (section C) ──
+        if t >= SEC_B_END:
+            arp_notes = ch['arp']
+            step = BEAT / 2  # 8th notes
+            for step_i in range(int(chord_dur / step)):
+                note_t = t + step_i * step
+                if note_t >= GEN_SEC:
+                    break
+                n2 = arp_notes[step_i % len(arp_notes)]
+                nn = min(int(SR * step * 0.75), int(SR * 0.3))
+                vol = 0.22
+                seg = bright_tone(freq(n2), nn, atk=0.008, rel=0.18) * vol
+                write(track, note_t, seg)
+
+            # High melody — root + fifth in upper octave, on beats 1 and 3
+            melody_map = {'C': ['C5','G5'], 'Am': ['A5','E5'],
+                          'F': ['F5','C6'], 'G': ['G5','D6']}
+            m_notes = melody_map.get(name, [ch['arp'][-1]])
+            for mi, mn in enumerate(m_notes):
+                note_t = t + mi * BEAT * 2
+                if note_t >= GEN_SEC:
+                    break
+                nn = min(int(SR * BEAT * 1.5), int(SR * 1.0))
+                seg = bright_tone(freq(mn), nn, atk=0.02, rel=0.5) * 0.13
+                write(track, note_t, seg)
+
+        t += chord_dur
         chord_idx += 1
 
-    # Reverb
+    # ── REVERB ──
     print("  applying reverb...")
-    track = add_reverb(track, wet=0.30)
+    track = reverb(track, wet=0.32)
 
-    # Normalise
+    # ── SECTION CROSSFADE (gradual volume ramp in sections B & C) ──
+    # Gently increase overall presence from section B onward
+    for i in range(total):
+        ts = i / SR
+        if ts < SEC_A_END:
+            gain = 1.0
+        elif ts < SEC_B_END:
+            gain = 1.0 + 0.25 * ((ts - SEC_A_END) / (SEC_B_END - SEC_A_END))
+        else:
+            gain = 1.25 + 0.15 * min((ts - SEC_B_END) / 20.0, 1.0)
+        track[i] *= gain
+
+    # ── NORMALIZE ──
     peak = np.max(np.abs(track))
     if peak > 0:
         track = track / peak * 0.88
 
-    # Global fade in (3s) / fade out (4s)
-    fi = int(SR * 3.0)
-    fo = int(SR * 4.0)
-    track[:fi]  *= np.linspace(0.0, 1.0, fi)
-    track[-fo:] *= np.linspace(1.0, 0.0, fo)
+    # ── GLOBAL FADES ──
+    fi = int(SR * 4.0)   # 4s fade-in
+    fo = int(SR * 5.0)   # 5s fade-out
+    track[:fi]  *= np.linspace(0, 1, fi)
+    track[-fo:] *= np.linspace(1, 0, fo)
 
     return (track * 32767).astype(np.int16)
 
 
+def write(track: np.ndarray, t_sec: float, seg: np.ndarray):
+    """Add seg into track starting at t_sec (safe boundary)."""
+    start = int(SR * t_sec)
+    end   = min(start + len(seg), len(track))
+    if end <= start:
+        return
+    track[start:end] += seg[:end - start]
+
+
+# ── MAIN ─────────────────────────────────────────────────────────────────────
+
 def main():
-    print("Generating background music (procedural synthesis)...")
-    print(f"  BPM: {BPM}  |  Chord duration: {CHORD_SEC:.2f}s  |  Target: {TARGET_SEC}s")
-    print(f"  Progression: C – Am – F – G (repeating)")
+    print("Generating background music…")
+    print(f"  BPM {BPM}  |  Arc: ambient → builds ~{SEC_A_END}s → uplifting ~{SEC_B_END}s")
 
-    audio_int16 = generate_track()
+    audio = make_track()
 
-    scipy.io.wavfile.write(TMP_WAV, SR, audio_int16)
-    print(f"  WAV written to {TMP_WAV}")
+    scipy.io.wavfile.write(TMP_WAV, SR, audio)
 
-    # Trim to target length and export MP3
     seg = AudioSegment.from_wav(TMP_WAV)[:int(TARGET_SEC * 1000)]
-
     os.makedirs("audio",        exist_ok=True)
     os.makedirs("public/audio", exist_ok=True)
-
     seg.export(OUTPUT_MP3, format="mp3", bitrate="128k")
     shutil.copy(OUTPUT_MP3, PUBLIC_MP3)
 
-    print(f"\nDone!")
-    print(f"  {OUTPUT_MP3}  ({len(seg)/1000:.1f}s)")
-    print(f"  {PUBLIC_MP3}  (copy)")
-    print("\nNext step: set MUSIC_ENABLED = true in src/Animatic.tsx")
+    print(f"\nDone — {len(seg)/1000:.1f}s")
+    print(f"  {OUTPUT_MP3}")
+    print(f"  {PUBLIC_MP3}")
 
 
 if __name__ == "__main__":

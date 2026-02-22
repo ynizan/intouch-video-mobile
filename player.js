@@ -19,7 +19,7 @@ let currentAudio = null;
 
 // Background music -- continuous across all scenes
 // Drop audio/music.mp3 into place to enable
-const musicEl = new Audio('audio/music.mp3');
+const musicEl = new Audio('music.mp3');
 musicEl.loop = true;
 musicEl.volume = 0.25;
 
