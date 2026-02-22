@@ -61,7 +61,7 @@
 .s2-li { display:flex; align-items:center; gap:7px; font-size:10px; font-weight:600; color:#8A8680; }
 .s2-gswatch { width:10px; height:10px; border-radius:2px; border:1.5px dashed rgba(212,165,116,0.4); flex-shrink:0; }
 
-/* Big-text callout — frameless, full-width centered, appears at last phrase */
+/* Big-text callout — frosted pill behind text, full-width centered */
 .s2-bigtext {
   position:absolute;
   left:0; right:0;
@@ -69,12 +69,15 @@
   text-align:center;
   z-index:10;
   pointer-events:none;
-  /* No background, no border, no padding */
+  padding:28px 40px 32px;
+  /* Frosted glass backdrop */
+  background:rgba(238,234,226,0.82);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 8px 48px rgba(0,0,0,0.09), 0 2px 12px rgba(0,0,0,0.05);
 }
 .s2-bigtext.active {
   opacity:1 !important;
   transform:translateY(-50%) !important;
-  background:transparent !important;
   border-left:none !important;
 }
 .s2-bigtext.future { opacity:0; transform:translateY(calc(-50% + 22px)); }
@@ -123,7 +126,7 @@
 }
 @keyframes s2-ev-pulse {
   0%, 100% { transform:scale(1); }
-  50%       { transform:scale(1.07); }
+  50%       { transform:scale(1.14); }
 }
 
 /* Ghost event pulse — when "The wall" bigtext appears */
