@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "InTouch pitch animatic -- Remotion composition",
   "scripts": {
+    "build": "python3 build.py",
     "preview": "npx remotion preview src/index.tsx",
     "render": "npx remotion render src/index.tsx Animatic out/animatic.mp4",
     "setup-audio": "mkdir -p public/audio && cp audio/*.mp3 public/audio/"
