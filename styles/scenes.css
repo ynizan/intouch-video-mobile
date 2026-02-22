@@ -283,7 +283,7 @@
   100% { transform:scale(2) translateX(-20%); }
 }
 #s7.active .s6-win {
-  transform-origin:8% 38%;
+  transform-origin:0% 38%;
   animation:s7-camera-zoom-pan 3.2s cubic-bezier(0.25,1,0.5,1) 1.2s both;
 }
 
