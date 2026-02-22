@@ -276,14 +276,15 @@
 #s7.active .s6-card.d2 { animation:s7-card-enter 0.5s cubic-bezier(0.22,1,0.36,1) 0.35s backwards; }
 #s7.active .s6-card.d3 { animation:s7-card-enter 0.5s cubic-bezier(0.22,1,0.36,1) 0.5s backwards; }
 
-/* Ron B. emphasis -- camera zoom into email */
-@keyframes s7-camera-zoom {
-  from { transform:scale(1); }
-  to   { transform:scale(2.5); }
+/* Ron B. emphasis -- camera zoom + pan across card */
+@keyframes s7-camera-zoom-pan {
+  0%   { transform:scale(1); }
+  35%  { transform:scale(2); }
+  100% { transform:scale(2) translateX(-10%); }
 }
 #s7.active .s6-win {
-  transform-origin:40% 38%;
-  animation:s7-camera-zoom 1.5s cubic-bezier(0.22,1,0.36,1) 1.5s both;
+  transform-origin:18% 38%;
+  animation:s7-camera-zoom-pan 2.2s cubic-bezier(0.22,1,0.36,1) 1.2s both;
 }
 
 /* ---------------------------------------------
