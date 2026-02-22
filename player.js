@@ -194,6 +194,9 @@ function render() {
   // S6 custom animations -- counter, scan line, big text, results
   if(sc.id === 's6') renderS6(scElapsed);
 
+  // S8 custom animations -- meetings pop in gradually
+  if(sc.id === 's8') renderS8(scElapsed);
+
   // Progress
   const pct = (elapsed/TOTAL)*100;
   document.getElementById('progress-fill').style.width = pct+'%';
@@ -435,6 +438,44 @@ function renderS6(t) {
     statusBadge.style.animation = 'none';
     if(scanStatus) scanStatus.innerHTML = '&#9679; Ready';
   }
+}
+
+// ===============================================================
+// S8 -- MEETING POP-IN ANIMATION
+// ===============================================================
+function renderS8(t) {
+  // Each "my network" meeting generates 2 new meetings
+  // They pop in staggered across the scene duration
+  const GEN_TIMINGS = [
+    1000,  // s8-gen-0: Ron B. via David
+    1600,  // s8-gen-1: Sarah K. via David
+    2200,  // s8-gen-2: Enterprise via Maya
+    2800,  // s8-gen-3: Lena R. via Maya
+    3400,  // s8-gen-4: Guy M. via Tom
+    4000,  // s8-gen-5: Nir S. via Tom
+    4600,  // s8-gen-6: Sascha M. via Jake
+    5400,  // s8-gen-7: * Sequoia Partner (top tier)
+  ];
+
+  let introCount = 0;
+  let topCount = 0;
+
+  for(let i = 0; i < GEN_TIMINGS.length; i++) {
+    const el = document.getElementById('s8-gen-' + i);
+    if(!el) continue;
+    const vis = t >= GEN_TIMINGS[i];
+    el.classList.toggle('s8-visible', vis);
+    if(vis) {
+      introCount++;
+      if(el.classList.contains('gold-ev')) topCount++;
+    }
+  }
+
+  // Update stats bar counters
+  const introEl = document.getElementById('s8-stat-intro');
+  const topEl = document.getElementById('s8-stat-top');
+  if(introEl) introEl.textContent = introCount;
+  if(topEl) topEl.textContent = topCount;
 }
 
 function easeOutQuad(t) { return t * (2 - t); }

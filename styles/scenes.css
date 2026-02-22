@@ -438,6 +438,25 @@
 .s7-grid { display:grid; grid-template-columns:44px repeat(5,1fr); padding:0 12px; height:520px; overflow:hidden; }
 .s7-ts { height:60px; border-bottom:1px solid #F1F3F4; display:flex; align-items:flex-start; padding-top:3px; }
 
+/* S8 meeting pop-in animation */
+.s8-gen {
+  opacity: 0;
+  transform: scale(0.7) translateY(4px);
+  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+              transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.s8-gen.s8-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+/* Extra punch for the top-tier event */
+.s8-gen.gold-ev {
+  transition-duration: 0.7s;
+}
+.s8-gen.gold-ev.s8-visible {
+  box-shadow: 0 0 16px rgba(212,165,116,0.35);
+}
+
 /* ---------------------------------------------
    == SCENE 10 -- TYPE A · Dark counter
 --------------------------------------------- */
