@@ -197,6 +197,9 @@ function render() {
   // S8 custom animations -- meetings pop in gradually
   if(sc.id === 's8') renderS8(scElapsed);
 
+  // S10 custom animation -- counting up to 30
+  if(sc.id === 's10') renderS10(scElapsed);
+
   // Progress
   const pct = (elapsed/TOTAL)*100;
   document.getElementById('progress-fill').style.width = pct+'%';
@@ -476,6 +479,28 @@ function renderS8(t) {
   const topEl = document.getElementById('s8-stat-top');
   if(introEl) introEl.textContent = introCount;
   if(topEl) topEl.textContent = topCount;
+}
+
+// ===============================================================
+// S10 -- COUNTER ANIMATION (0 → 30)
+// ===============================================================
+function renderS10(t) {
+  const counterEl = document.getElementById('s10w7');
+  if(!counterEl) return;
+
+  // Counter starts immediately and reaches 30 to sync with VO "thirty"
+  const countStart = 0;
+  const countEnd   = 1200;
+
+  if(t < countStart) {
+    counterEl.textContent = '0';
+  } else if(t < countEnd) {
+    const p = (t - countStart) / (countEnd - countStart);
+    const count = Math.round(30 * easeOutQuad(p));
+    counterEl.textContent = count;
+  } else {
+    counterEl.textContent = '30';
+  }
 }
 
 function easeOutQuad(t) { return t * (2 - t); }
