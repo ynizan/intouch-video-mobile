@@ -393,6 +393,37 @@
 #s6-card .phrase-txt .g { color:var(--gold); font-size:22px; }
 
 /* ---------------------------------------------
+   == SCENE 7 -- TYPE C · Strategic Ask Brief
+--------------------------------------------- */
+#s7 { background:#F0EDE8; }
+#s7 .s6-win { position:absolute; inset:10px; flex:none; }
+
+/* Card entrance -- slide from left (continuity from S6 scan) */
+@keyframes s7-card-enter {
+  from { transform:translateX(-40px); opacity:0; }
+}
+#s7.active .s6-card.d1 { animation:s7-card-enter 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s backwards; }
+#s7.active .s6-card.d2 { animation:s7-card-enter 0.5s cubic-bezier(0.22,1,0.36,1) 0.35s backwards; }
+#s7.active .s6-card.d3 { animation:s7-card-enter 0.5s cubic-bezier(0.22,1,0.36,1) 0.5s backwards; }
+
+/* Ron B. emphasis -- camera zoom then Z-pan across card */
+@keyframes s7-camera-zoom {
+  0%   { transform:scale(1); }
+  100% { transform:scale(2); }
+}
+@keyframes s7-camera-zpan {
+  0%   { translate:0    0; }
+  40%  { translate:-20% 0; }
+  50%  { translate:20%  -10%; }
+  100% { translate:-20% -10%; }
+}
+#s7.active .s6-win {
+  transform-origin:0% 38%;
+  animation:s7-camera-zoom 0.8s cubic-bezier(0.25,1,0.5,1) 1.2s both,
+            s7-camera-zpan 3.7s linear 3.0s both;
+}
+
+/* ---------------------------------------------
    == SCENES 8 + 9 -- TYPE C · Light Calendar
 --------------------------------------------- */
 #s8, #s9 { background:#F6F8FC; }
