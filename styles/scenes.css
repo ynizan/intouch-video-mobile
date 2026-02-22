@@ -397,27 +397,24 @@
 --------------------------------------------- */
 #s8, #s9 { background:#F6F8FC; }
 
-/* S9 right-to-left calendar entrance (next week slide) */
-@keyframes s9-cal-enter {
-  from { opacity:0; transform:translateX(80px); }
-  to   { opacity:1; transform:translateX(0); }
+/* S9 week-swipe: old week slides out left, new week slides in from right */
+.s9-old-cal, .s9-new-cal {
+  transition: transform 0.55s cubic-bezier(0.22,1,0.36,1), opacity 0.55s ease;
 }
-#s9.active .s9-cal {
-  animation: s9-cal-enter 0.6s cubic-bezier(0.22,1,0.36,1);
-}
+.s9-new-cal { transform: translateX(105%); }
+.s9-old-cal.s9-swiped { transform: translateX(-105%); opacity:0.3; }
+.s9-new-cal.s9-swiped { transform: translateX(0); }
 
-/* S9 gradual event appearance */
+/* S9 compact event pop-in */
 .s9-ev-anim {
   opacity:0;
-  transform:translateY(8px) scale(0.92);
-  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
-              transform 0.5s cubic-bezier(0.22,1,0.36,1),
-              box-shadow 0.5s ease;
+  transform:scale(0.8);
+  transition: opacity 0.28s cubic-bezier(0.22,1,0.36,1),
+              transform 0.28s cubic-bezier(0.22,1,0.36,1);
 }
 .s9-ev-anim.s9-ev-in {
   opacity:1;
-  transform:translateY(0) scale(1);
-  box-shadow:0 2px 12px rgba(212,165,116,0.25);
+  transform:scale(1);
 }
 .s7-win { position:absolute; inset:10px; background:#FFFFFF; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.1); overflow:hidden; }
 .s7-chrome { background:#FFFFFF; padding:9px 14px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #E0E0E0; }

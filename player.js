@@ -441,20 +441,30 @@ function renderS6(t) {
 }
 
 // ===============================================================
-// S9 -- GRADUAL EVENT APPEARANCE
+// S9 -- WEEK SWIPE + RAPID EVENT FILL
 // ===============================================================
 function renderS9(t) {
-  const evs = document.querySelectorAll('#s9 .s9-ev-anim');
-  let visibleCount = 0;
+  const oldCal = document.getElementById('s9-old');
+  const newCal = document.getElementById('s9-new');
+
+  // Swipe at 800ms: old week out left, new week in from right
+  const swiped = t >= 800;
+  if(oldCal) oldCal.classList.toggle('s9-swiped', swiped);
+  if(newCal) newCal.classList.toggle('s9-swiped', swiped);
+
+  // Rapid event appearance on new calendar
+  const evs = document.querySelectorAll('#s9-new .s9-ev-anim');
+  let count = 0;
   evs.forEach(ev => {
     const delay = parseInt(ev.dataset.appear) || 0;
     const visible = t >= delay;
     ev.classList.toggle('s9-ev-in', visible);
-    if(visible) visibleCount++;
+    if(visible) count++;
   });
-  // Update Top Tier stat counter
-  const topTierNum = document.getElementById('s9-top-tier-num');
-  if(topTierNum) topTierNum.textContent = visibleCount;
+
+  // Update counter
+  const counterEl = document.getElementById('s9-count');
+  if(counterEl) counterEl.textContent = count;
 }
 
 function easeOutQuad(t) { return t * (2 - t); }
