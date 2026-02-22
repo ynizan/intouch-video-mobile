@@ -284,13 +284,13 @@
 @keyframes s7-camera-zpan {
   0%   { translate:0    0; }
   40%  { translate:-20% 0; }
-  55%  { translate:20%  -5%; }
-  100% { translate:-20% -5%; }
+  50%  { translate:20%  -10%; }
+  100% { translate:-20% -10%; }
 }
 #s7.active .s6-win {
   transform-origin:0% 38%;
   animation:s7-camera-zoom 0.8s cubic-bezier(0.25,1,0.5,1) 1.2s both,
-            s7-camera-zpan 3.2s linear 2.0s both;
+            s7-camera-zpan 3.7s linear 3.0s both;
 }
 
 /* ---------------------------------------------
