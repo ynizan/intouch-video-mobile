@@ -175,6 +175,21 @@ function render() {
     });
   }
 
+  // S4 zoom — zoom into desperation text midway through
+  if(sc.id === 's4') {
+    const zw = document.querySelector('.s4-zoom-wrap');
+    if(zw) {
+      const zoomStart = 3250;
+      if(scElapsed > zoomStart) {
+        const p = Math.min((scElapsed - zoomStart) / (sc.duration - zoomStart), 1);
+        const eased = p * p; // ease-in: builds tension
+        zw.style.transform = 'scale(' + (1 + eased * 2.2) + ')';
+      } else {
+        zw.style.transform = 'scale(1)';
+      }
+    }
+  }
+
   // Progress
   const pct = (elapsed/TOTAL)*100;
   document.getElementById('progress-fill').style.width = pct+'%';
