@@ -122,13 +122,14 @@ body {
   background:transparent !important;
 }
 .narrator-card .phrase.active { border-left:none; background:transparent !important; }
+.narrator-card .phrase:not(.active) { display:none; }
 .narrator-card .phrase-eye { display:none; }
 .narrator-card .phrase-txt {
-  font-size:17px; line-height:1.5; color:rgba(255,255,255,0.92);
+  font-size:22px; line-height:1.5; color:rgba(255,255,255,0.92);
 }
 .narrator-card .phrase-txt b  { color:#fff; }
 .narrator-card .phrase-txt em { color:#fff; }
-.narrator-card .phrase-txt .g { color:var(--gold); font-size:17px; }
+.narrator-card .phrase-txt .g { color:var(--gold); font-size:22px; }
 
 /* ---------------------------------------------
    SHARED UI BITS
