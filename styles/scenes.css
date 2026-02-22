@@ -190,9 +190,14 @@
 .s3-ca { font-size:9px; font-weight:700; color:#888; border:1px solid #C8C4BC; border-radius:100px; padding:3px 10px; white-space:nowrap; margin-left:auto; }
 
 /* ---------------------------------------------
-   == SCENE 4 -- TYPE B · Light Email
+   == SCENE 4 -- TYPE C · Light Email
 --------------------------------------------- */
 #s4 { background:#E8E4DC; display:flex; align-items:center; justify-content:center; }
+.s4-zoom-wrap {
+  position:absolute; inset:0;
+  transform-origin:50% 65%;
+  will-change:transform;
+}
 .s4-win { width:820px; background:#FDFBF8; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.12); overflow:hidden; position:relative; }
 .s4-win .window-chrome { background:#EDEAE2; border-color:#DDD9D0; }
 .s4-fields { padding:14px 24px 0; border-bottom:1px solid #F0EDE6; }
@@ -209,13 +214,31 @@
 .s4-gd { width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 5px rgba(212,165,116,0.6); }
 .s4-toolbar { padding:11px 24px; border-top:1px solid #F0EDE6; display:flex; gap:10px; }
 .s4-send { background:#7A9AAA; color:#fff; border-radius:5px; padding:7px 16px; font-size:12px; font-weight:700; }
-.s4-side { position:absolute; right:-210px; top:50%; transform:translateY(-50%); width:190px; }
 
 /* ---------------------------------------------
    == SCENE 5 -- TYPE A · Dark pivot
 --------------------------------------------- */
 #s5 { background:#0D0D0D; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
 #s5::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%, rgba(212,165,116,0.07) 0%, transparent 60%); }
+
+/* Dramatic entrance — S4→S5 pivot moment */
+@keyframes s5-enter {
+  0%   { opacity:0; transform:scale(0.5); }
+  50%  { opacity:1; transform:scale(1.06); }
+  100% { transform:scale(1); }
+}
+#s5.active { animation: s5-enter 0.9s cubic-bezier(0.22,1,0.36,1); }
+/* Gold flash overlay */
+@keyframes s5-flash {
+  0%   { opacity:0.4; }
+  100% { opacity:0; }
+}
+#s5::after {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at center, rgba(212,165,116,0.4) 0%, transparent 65%);
+  opacity:0; pointer-events:none; z-index:10;
+}
+#s5.active::after { animation: s5-flash 1.2s ease-out forwards; }
 .s5-then { font-size:11px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:#282828; margin-bottom:22px; position:relative; z-index:1; }
 .s5-main { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:50px; color:#666; line-height:1.3; position:relative; z-index:1; }
 .s5-gordy { font-family:'Manrope',sans-serif; font-style:normal; font-weight:800; font-size:66px; color:var(--gold); letter-spacing:-0.03em; display:block; margin-top:8px; text-shadow:0 0 60px rgba(212,165,116,0.25); }

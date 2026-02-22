@@ -175,6 +175,22 @@ function render() {
     });
   }
 
+  // S4 zoom — zoom into desperation text, hold at max for last 0.5s
+  if(sc.id === 's4') {
+    const zw = document.querySelector('.s4-zoom-wrap');
+    if(zw) {
+      const zoomStart = 2750;
+      const zoomEnd = sc.duration - 500; // reach max 500ms before end, then hold
+      if(scElapsed > zoomStart) {
+        const p = Math.min((scElapsed - zoomStart) / (zoomEnd - zoomStart), 1);
+        const eased = p * p; // ease-in: builds tension
+        zw.style.transform = 'scale(' + (1 + eased * 2.2) + ')';
+      } else {
+        zw.style.transform = 'scale(1)';
+      }
+    }
+  }
+
   // S6 custom animations -- counter, scan line, big text, results
   if(sc.id === 's6') renderS6(scElapsed);
 
