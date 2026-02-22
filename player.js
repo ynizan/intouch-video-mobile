@@ -21,7 +21,20 @@ let currentAudio = null;
 // Drop audio/music.mp3 into place to enable
 const musicEl = new Audio('music.mp3');
 musicEl.loop = true;
-musicEl.volume = 0.25;
+musicEl.volume = 0;
+
+const MUSIC_MAX_VOL = 0.25;
+const MUSIC_FADE_MS = 1000; // 1s fade in/out
+
+function updateMusicVolume() {
+  let vol = MUSIC_MAX_VOL;
+  if (elapsed < MUSIC_FADE_MS) {
+    vol = MUSIC_MAX_VOL * (elapsed / MUSIC_FADE_MS);
+  } else if (elapsed > TOTAL - MUSIC_FADE_MS) {
+    vol = MUSIC_MAX_VOL * ((TOTAL - elapsed) / MUSIC_FADE_MS);
+  }
+  musicEl.volume = Math.max(0, Math.min(MUSIC_MAX_VOL, vol));
+}
 
 function stopAllAudio() {
   Object.values(audioEls).forEach(a => { a.pause(); a.currentTime = 0; });
@@ -201,6 +214,7 @@ function tick(ts) {
     playSceneAudio(SCENES[si]);
   }
 
+  updateMusicVolume();
   render();
   if(elapsed>=TOTAL){ stop(); return; }
   rafId = requestAnimationFrame(tick);
@@ -213,6 +227,7 @@ function play() {
   lastTs=null;
   const si = sceneIndexAt(elapsed);
   playSceneAudio(SCENES[si]);
+  updateMusicVolume();
   musicEl.play().catch(()=>{});
   rafId=requestAnimationFrame(tick);
 }
