@@ -74,8 +74,8 @@ export function S05Pivot() {
   // Badge
   const badgeP = sp(frame, 52);
 
-  // Subtitle words starting at 65, 2 frames apart
-  const subStart = 65;
+  // Subtitle block fade-in (no word-by-word animation — word reveal stops at "InTouch.")
+  const subP = sp(frame, 65);
 
   return (
     <div
@@ -207,7 +207,7 @@ export function S05Pivot() {
         </span>
       </div>
 
-      {/* Subtitle */}
+      {/* Subtitle — entire block fades in together; no word-by-word reveal */}
       <div
         style={{
           fontFamily: "'IBM Plex Serif', serif",
@@ -218,25 +218,22 @@ export function S05Pivot() {
           color: "#555",
           position: "relative",
           zIndex: 1,
+          opacity: subP,
         }}
       >
-        {SUB_WORDS.map(({ text, special, boldColor }, i) => {
-          const af = subStart + i * 2;
-          const style = wordStyle(frame, af, special ? (boldColor as string) : "#555");
-          return (
-            <span
-              key={i}
-              style={{
-                ...style,
-                fontStyle: special ? "normal" : "italic",
-                fontWeight: special ? 700 : undefined,
-                marginRight: 5,
-              }}
-            >
-              {text}
-            </span>
-          );
-        })}
+        {SUB_WORDS.map(({ text, special, boldColor }, i) => (
+          <span
+            key={i}
+            style={{
+              color: special ? (boldColor as string) : "#555",
+              fontStyle: special ? "normal" : "italic",
+              fontWeight: special ? 700 : undefined,
+              marginRight: 5,
+            }}
+          >
+            {text}
+          </span>
+        ))}
       </div>
     </div>
   );
