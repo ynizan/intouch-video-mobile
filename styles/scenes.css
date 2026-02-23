@@ -281,22 +281,22 @@
 /* Split layout: LinkedIn left, InTouch right */
 .s6-split {
   position:absolute; inset:10px; bottom:0;
-  display:flex; flex-direction:column; gap:8px; padding:10px;
+  display:flex; flex-direction:column; gap:20px; padding:16px;
   z-index:1;
 }
 .s6-linkedin-win {
-  height:340px; background:#F2F0EC; border-radius:8px;
+  height:480px; background:#F2F0EC; border-radius:8px;
   box-shadow:0 12px 40px rgba(0,0,0,0.08);
   overflow:hidden; display:flex; flex-direction:column;
   filter:saturate(0.35) brightness(0.97);
 }
 .s6-intouch-win {
-  width:100%; background:#FAFBFE; border-radius:8px;
+  width:100%; min-height:420px; background:#FAFBFE; border-radius:8px;
   box-shadow:0 12px 40px rgba(0,0,0,0.1);
-  overflow:hidden; display:flex; flex-direction:column;
+  overflow:hidden; display:flex; flex-direction:column; flex-shrink:0;
 }
 .s6-active-badge {
-  background:#D4A574; color:#fff; font-size:9px; font-weight:700;
+  background:#D4A574; color:#fff; font-size:13px; font-weight:700;
   padding:3px 8px; border-radius:4px; letter-spacing:0.05em;
   animation:s6-badge-pulse 1.5s ease-in-out infinite;
 }
@@ -311,16 +311,16 @@
   padding:10px 18px; background:#F0F2F8; border-bottom:1px solid #E0E4EC;
 }
 .s6-counter-label {
-  font-size:10px; font-weight:700; letter-spacing:0.06em;
+  font-size:14px; font-weight:700; letter-spacing:0.06em;
   text-transform:uppercase; color:#718096;
 }
 .s6-counter-num {
-  font-size:22px; font-weight:800; color:var(--gold);
+  font-size:26px; font-weight:800; color:var(--gold);
   font-variant-numeric:tabular-nums; letter-spacing:-0.02em;
   min-width:42px;
 }
 .s6-counter-total {
-  font-size:13px; font-weight:600; color:#A0AEC0;
+  font-size:17px; font-weight:600; color:#A0AEC0;
 }
 .s6-progress-track {
   flex:1; height:4px; background:#E0E4EC; border-radius:2px; overflow:hidden;
@@ -366,7 +366,7 @@
   opacity:1 !important; transform:translateY(0) !important;
 }
 .s6-filtered-note {
-  margin-top:10px; font-size:9px; color:#A0AEC0;
+  margin-top:10px; font-size:13px; color:#A0AEC0;
   text-align:center; font-style:italic;
   transition:opacity 0.5s ease;
 }
@@ -417,6 +417,13 @@
 #s6-card .phrase-txt b  { color:var(--ink); }
 #s6-card .phrase-txt .g { color:var(--gold); }
 
+/* S6-scoped font bumps for LinkedIn window (+4-5px) */
+.s6-linkedin-win .s3-logo { font-size:21px; }
+.s6-linkedin-win .s3-ch { font-size:16px; }
+.s6-linkedin-win .s3-cn { font-size:16px; }
+.s6-linkedin-win .s3-ct { font-size:14px; }
+.s6-linkedin-win .s3-cm { font-size:13px; }
+.s6-linkedin-win .s3-ca { font-size:13px; }
 .s6-linkedin-win .s3-left { display:none; }
 
 /* ---------------------------------------------
