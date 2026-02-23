@@ -545,6 +545,7 @@
 .s8-compare { display:flex; align-items:center; justify-content:center; gap:6vw; position:relative; z-index:1; width:100%; padding:0 5%; box-sizing:border-box; }
 .s8-nb { display:flex; flex-direction:column; align-items:center; gap:16px; }
 .s8-num { font-size:160px; font-weight:800; letter-spacing:-0.04em; line-height:1; }
+#s10 .s8-num { font-size:320px; }
 .s8-num.gray { color:#1C1C1C; }
 .s8-num.gold { color:var(--gold); text-shadow:0 0 80px rgba(212,165,116,0.4), 0 0 160px rgba(212,165,116,0.15); }
 .s8-lbl { font-size:21px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-align:center; }
@@ -556,7 +557,7 @@
 .s8-rule { width:44px; height:1px; background:rgba(212,165,116,0.2); margin:64px 0; position:relative; z-index:1; }
 .s8-bottom { display:flex; flex-direction:column; align-items:center; gap:32px; position:relative; z-index:1; }
 .s8-main { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:40px; color:#444; line-height:1.4; text-align:center; }
-.s8-chain { display:flex; align-items:center; gap:7px; font-size:18px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.s8-chain { display:flex; align-items:center; gap:7px; font-size:18px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; margin-top:100px; }
 .s8-pill { background:#141414; border:1px solid #222; border-radius:100px; padding:4px 12px; color:#444; }
 .s8-pill.g { border-color:rgba(212,165,116,0.3); color:var(--gold); background:rgba(212,165,116,0.06); }
 .s8-sep { color:#1C1C1C; }
