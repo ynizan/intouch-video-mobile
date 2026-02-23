@@ -38,9 +38,9 @@
 .s2-dh { text-align:center; }
 .s2-dn { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#AAA; }
 .s2-dd { font-size:19px; font-weight:700; color:#666; }
-.s2-grid-wrap { height:440px; overflow:hidden; }
+.s2-grid-wrap { height:620px; overflow:hidden; }
 .s2-grid { height:100%; display:grid; grid-template-columns:36px repeat(5,1fr); padding:0 16px; }
-.s2-ts { height:50px; border-bottom:1px solid #F4F2EE; display:flex; align-items:flex-start; padding-top:4px; }
+.s2-ts { height:72px; border-bottom:1px solid #F4F2EE; display:flex; align-items:flex-start; padding-top:4px; }
 .s2-ev { position:absolute; left:3px; right:3px; border-radius:4px; padding:5px 8px; font-size:11px; }
 .s2-ev.real { background:#D8D4CC; border-left:3px solid #9A9690; }
 .s2-ev .ev-n { font-weight:700; color:#5A5652; }
