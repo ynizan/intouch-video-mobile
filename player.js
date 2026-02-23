@@ -180,7 +180,7 @@ function render() {
       if(scElapsed > zoomStart) {
         const p = Math.min((scElapsed - zoomStart) / (zoomEnd - zoomStart), 1);
         const eased = p * p; // ease-in: builds tension
-        zw.style.transform = 'scale(' + (1 + eased * 1.6) + ')';
+        zw.style.transform = 'scale(' + (1 + eased * 1.28) + ')';
       } else {
         zw.style.transform = 'scale(1)';
       }
