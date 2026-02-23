@@ -569,16 +569,16 @@
 #s11::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,0.9) 100%); }
 .s9-glow { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%,rgba(212,165,116,0.06) 0%,transparent 50%); z-index:1; }
 .s9-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; z-index:2; }
-.s9-logo { display:flex; align-items:center; gap:13px; margin-bottom:28px; }
+.s9-logo { display:flex; align-items:center; gap:13px; margin-bottom:40px; }
 .s9-wm { font-family:'Manrope',sans-serif; font-weight:800; font-size:64px; color:#FFF; letter-spacing:-0.02em; }
-.s9-tpri { font-family:'Manrope',sans-serif; font-weight:800; font-size:48px; color:#FFF; letter-spacing:-0.01em; line-height:1.3; margin-bottom:7px; }
+.s9-tpri { font-family:'Manrope',sans-serif; font-weight:800; font-size:48px; color:#FFF; letter-spacing:-0.01em; line-height:1.3; margin-bottom:14px; }
 .s9-tsec { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:36px; color:#444; }
 .s9-tsec .g { font-style:normal; font-weight:500; color:var(--gold); }
-.s9-rule { width:38px; height:1px; background:rgba(212,165,116,0.35); margin:28px 0; }
+.s9-rule { width:38px; height:1px; background:rgba(212,165,116,0.35); margin:36px 0; }
 .s9-ctas { display:flex; align-items:center; gap:18px; }
 .s9-cta { background:var(--gold); color:#0D0D0D; border-radius:100px; padding:16px 42px; font-size:20px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; }
 .s9-cta2 { font-size:23px; font-weight:600; color:#333; text-decoration:underline; text-decoration-color:#222; text-underline-offset:4px; }
-.s9-url { margin-top:40px; font-size:20px; font-weight:600; color:#222; letter-spacing:0.1em; text-transform:uppercase; }
+.s9-url { margin-top:52px; font-size:20px; font-weight:600; color:#222; letter-spacing:0.1em; text-transform:uppercase; }
 .s9-corner { position:absolute; width:34px; height:34px; border-color:rgba(212,165,116,0.12); border-style:solid; z-index:2; }
 .s9-tl{top:28px;left:28px;border-width:1px 0 0 1px;} .s9-tr{top:28px;right:28px;border-width:1px 1px 0 0;}
 .s9-bl{bottom:28px;left:28px;border-width:0 0 1px 1px;} .s9-br{bottom:28px;right:28px;border-width:0 1px 1px 0;}
