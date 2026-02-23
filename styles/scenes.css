@@ -257,7 +257,7 @@
 /* Split layout: LinkedIn left, InTouch right */
 .s6-split {
   position:absolute; inset:10px; bottom:0;
-  display:flex; flex-direction:column; gap:8px; padding:10px;
+  display:flex; flex-direction:column; gap:20px; padding:16px;
   z-index:1;
 }
 .s6-linkedin-win {
