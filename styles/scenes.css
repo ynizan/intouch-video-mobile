@@ -267,6 +267,7 @@
   filter:saturate(0.35) brightness(0.97);
 }
 .s6-intouch-win {
+  margin-top:100px;
   width:100%; background:#FAFBFE; border-radius:8px;
   box-shadow:0 12px 40px rgba(0,0,0,0.1);
   overflow:hidden; display:flex; flex-direction:column;
