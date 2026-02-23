@@ -244,9 +244,23 @@ function tick(ts) {
     if(lastSceneIndex === 7 && si === 8 && s8El && s9El) {
       s8El.classList.add('no-fade');
       s9El.classList.add('no-fade');
+      // Make s9 narrator card appear instantly (no slide-up animation)
+      const s9Card = document.getElementById('s9-card');
+      if(s9Card) {
+        s9Card.style.transition = 'none';
+        s9Card.classList.add('nc-in');
+      }
+      // Reset swipe state instantly so calendars don't "un-swipe" on re-entry
+      const oldCal = document.getElementById('s9-old');
+      const newCal = document.getElementById('s9-new');
+      if(oldCal) { oldCal.style.transition = 'none'; oldCal.classList.remove('s9-swiped'); }
+      if(newCal) { newCal.style.transition = 'none'; newCal.classList.remove('s9-swiped'); }
       requestAnimationFrame(()=>requestAnimationFrame(()=>{
         s8El.classList.remove('no-fade');
         s9El.classList.remove('no-fade');
+        if(s9Card) s9Card.style.transition = '';
+        if(oldCal) oldCal.style.transition = '';
+        if(newCal) newCal.style.transition = '';
       }));
     }
     lastSceneIndex = si;
