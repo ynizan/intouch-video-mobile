@@ -496,17 +496,9 @@ function renderS8(t) {
 }
 
 // ===============================================================
-// S9 -- WEEK SWIPE + RAPID EVENT FILL
+// S9 -- RAPID EVENT FILL
 // ===============================================================
 function renderS9(t) {
-  const oldCal = document.getElementById('s9-old');
-  const newCal = document.getElementById('s9-new');
-
-  // Swipe at 800ms: old week out left, new week in from right
-  const swiped = t >= 800;
-  if(oldCal) oldCal.classList.toggle('s9-swiped', swiped);
-  if(newCal) newCal.classList.toggle('s9-swiped', swiped);
-
   // Rapid event appearance on new calendar
   const evs = document.querySelectorAll('#s9-new .s9-ev-anim');
   let count = 0;
