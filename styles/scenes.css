@@ -189,6 +189,30 @@
 .s3-cm { font-size:9px; color:#AAA; }
 .s3-ca { font-size:9px; font-weight:700; color:#888; border:1px solid #C8C4BC; border-radius:100px; padding:3px 10px; white-space:nowrap; margin-left:auto; }
 
+/* S3 bigger sizes — scoped to #s3 so S6 (which reuses .s3-* classes) stays compact */
+#s3 .s3-li-head { padding:12px 24px; gap:16px; }
+#s3 .s3-logo { font-size:22px; }
+#s3 .s3-search { padding:8px 14px; gap:8px; width:340px; }
+#s3 .s3-search span:last-child { font-size:15px !important; }
+#s3 .s3-left { padding:14px 20px; gap:16px; }
+#s3 .s3-avatar { width:60px; height:60px; }
+#s3 .s3-name { font-size:18px; }
+#s3 .s3-title { font-size:14px; }
+#s3 .s3-div { margin:12px 0; }
+#s3 .s3-stat { margin-bottom:8px; }
+#s3 .s3-sl { font-size:13px; }
+#s3 .s3-sv { font-size:13px; }
+#s3 .s3-conns { padding:12px 18px; }
+#s3 .s3-ch { font-size:15px; margin-bottom:12px; padding-bottom:10px; }
+#s3 .s3-ch span:last-child { font-size:12px !important; }
+#s3 .s3-row { gap:14px; padding:10px 0; }
+#s3 .s3-av { width:48px; height:48px; }
+#s3 .s3-cn { font-size:16px; }
+#s3 .s3-ct { font-size:13px; }
+#s3 .s3-cm { font-size:11px; }
+#s3 .s3-ca { font-size:12px; padding:5px 14px; }
+#s3 .s3-win .window-chrome div[style*="font-size:11px"] { font-size:14px !important; }
+
 /* ---------------------------------------------
    == SCENE 4 -- TYPE C · Light Email
 --------------------------------------------- */
