@@ -59,13 +59,13 @@ function scale() {
   const vw = window.innerWidth;
   const ctrlH = controls.offsetHeight + (voVisible ? 60 : 0) + 2;
   const vh = window.innerHeight - ctrlH - 8;
-  const s = Math.min(vw/1280, vh/720, 1);
+  const s = Math.min(vw/720, vh/1280, 1);
   canvas.style.transform = `scale(${s})`;
-  canvas.style.marginBottom = `${-(720*(1-s))}px`;
-  const W = Math.min(1280, Math.round(1280*s));
+  canvas.style.marginBottom = `${-(1280*(1-s))}px`;
+  const W = Math.min(720, Math.round(720*s));
   controls.style.width = W+'px';
   voBar.style.width = W+'px';
-  const ml = Math.max(0, (vw-1280*s)/2);
+  const ml = Math.max(0, (vw-720*s)/2);
   canvas.style.marginLeft = ml+'px';
   controls.style.marginLeft = ml+'px';
   voBar.style.marginLeft = ml+'px';
@@ -184,7 +184,7 @@ function render() {
       if(scElapsed > zoomStart) {
         const p = Math.min((scElapsed - zoomStart) / (zoomEnd - zoomStart), 1);
         const eased = p * p; // ease-in: builds tension
-        zw.style.transform = 'scale(' + (1 + eased * 2.2) + ')';
+        zw.style.transform = 'scale(' + (1 + eased * 1.6) + ')';
       } else {
         zw.style.transform = 'scale(1)';
       }
@@ -395,8 +395,8 @@ function renderS6(t) {
     // Oscillate scan line position through the connection rows
     const cycle = ((t - 4600) % 2000) / 2000;
     const rowCount = 8;
-    const rowH = 52; // approximate row height
-    const topOffset = 42; // header height
+    const rowH = 44; // approximate row height
+    const topOffset = 36; // header height
     const pos = topOffset + (cycle * rowCount * rowH);
     scanLine.style.top = pos + 'px';
   } else {
