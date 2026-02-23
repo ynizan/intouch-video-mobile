@@ -194,12 +194,12 @@
 #s3 .s3-logo { font-size:24px; }
 #s3 .s3-search { padding:8px 14px; gap:8px; width:340px; }
 #s3 .s3-search span:last-child { font-size:17px !important; }
-#s3 .s3-left { padding:14px 20px; gap:16px; }
+#s3 .s3-left { padding:14px 20px; gap:16px; flex-wrap:nowrap; overflow:hidden; }
 #s3 .s3-avatar { width:60px; height:60px; }
-#s3 .s3-name { font-size:20px; }
-#s3 .s3-title { font-size:16px; }
-#s3 .s3-div { margin:12px 0; }
-#s3 .s3-stat { margin-bottom:8px; }
+#s3 .s3-name { font-size:20px; white-space:nowrap; }
+#s3 .s3-title { font-size:16px; white-space:nowrap; }
+#s3 .s3-div { display:none; }
+#s3 .s3-stat { margin-bottom:0; white-space:nowrap; }
 #s3 .s3-sl { font-size:15px; }
 #s3 .s3-sv { font-size:15px; }
 #s3 .s3-conns { padding:12px 18px; }
