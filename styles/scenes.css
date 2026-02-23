@@ -239,12 +239,12 @@
   opacity:0; pointer-events:none; z-index:10;
 }
 #s5.active::after { animation: s5-flash 1.2s ease-out forwards; }
-.s5-then { font-size:17px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:#282828; margin-bottom:22px; position:relative; z-index:1; }
+.s5-then { font-size:17px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:#282828; margin-bottom:32px; position:relative; z-index:1; }
 .s5-main { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:68px; color:#666; line-height:1.3; position:relative; z-index:1; }
-.s5-gordy { font-family:'Manrope',sans-serif; font-style:normal; font-weight:800; font-size:92px; color:var(--gold); letter-spacing:-0.03em; display:flex; align-items:center; justify-content:center; gap:13px; margin-top:8px; text-shadow:0 0 60px rgba(212,165,116,0.25); }
+.s5-gordy { font-family:'Manrope',sans-serif; font-style:normal; font-weight:800; font-size:92px; color:var(--gold); letter-spacing:-0.03em; display:flex; align-items:center; justify-content:center; gap:13px; margin-top:16px; text-shadow:0 0 60px rgba(212,165,116,0.25); }
 .s5-gordy svg { flex-shrink:0; }
-.s5-rule { width:36px; height:1px; background:rgba(212,165,116,0.3); margin:36px auto 28px; position:relative; z-index:1; }
-.s5-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(212,165,116,0.08); border:1px solid rgba(212,165,116,0.2); border-radius:100px; padding:5px 14px; margin-bottom:12px; position:relative; z-index:1; }
+.s5-rule { width:36px; height:1px; background:rgba(212,165,116,0.3); margin:48px auto 36px; position:relative; z-index:1; }
+.s5-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(212,165,116,0.08); border:1px solid rgba(212,165,116,0.2); border-radius:100px; padding:5px 14px; margin-bottom:20px; position:relative; z-index:1; }
 .s5-bd { width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 6px rgba(212,165,116,0.5); }
 .s5-bt { font-size:14px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:rgba(212,165,116,0.7); }
 .s5-sub { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:34px; line-height:1.5; max-width:620px; color:#555; position:relative; z-index:1; }
