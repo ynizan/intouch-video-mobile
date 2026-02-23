@@ -11,12 +11,12 @@
 .s1-h { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:56px; color:#3A3830; line-height:1.35; max-width:620px; letter-spacing:-0.01em; }
 .s1-h .s1-seq { font-style:normal; font-family:'Manrope',sans-serif; font-weight:800; color:var(--gold); font-size:58px; letter-spacing:-0.02em; }
 .s1-rule { width:48px; height:1px; background:#A8A49C; margin:32px 0; }
-.s1-legend { display:flex; align-items:center; gap:0; font-family:'IBM Plex Serif',serif; font-style:italic; font-size:26px; }
+.s1-legend { display:flex; flex-direction:column; align-items:center; gap:50px; font-family:'IBM Plex Serif',serif; font-style:italic; font-size:26px; }
 .s1-lgray { display:flex; align-items:center; gap:9px; color:#8A8680; }
 .s1-lgold { display:flex; align-items:center; gap:9px; color:rgba(212,165,116,0.65); }
 .s1-ldot-g { width:11px; height:11px; border-radius:50%; background:#9A9690; flex-shrink:0; }
 .s1-ldot-au { width:11px; height:11px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px rgba(212,165,116,0.5); flex-shrink:0; }
-.s1-lconn { font-style:normal; font-family:'Manrope',sans-serif; font-size:20px; font-weight:600; color:#7A7870; margin:0 16px; letter-spacing:0.04em; }
+.s1-lconn { font-style:normal; font-family:'Manrope',sans-serif; font-size:20px; font-weight:600; color:#7A7870; letter-spacing:0.04em; }
 
 /* ---------------------------------------------
    == SCENE 2 -- TYPE B · Light cal (full-width)
