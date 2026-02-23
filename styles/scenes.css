@@ -466,21 +466,21 @@
 /* S7 overrides — position window absolutely to fill scene */
 #s7 .s6-win { position:absolute; inset:10px; flex:none; }
 
-/* S7 font-size bumps (+4-6px) so text reads clearly during camera zoom */
-#s7 .s6-subj { font-size:22px; }
-#s7 .s6-sn { font-size:16px; }
-#s7 .s6-se { font-size:15px; }
-#s7 .s6-st { font-size:15px; }
-#s7 .s6-wav { font-size:19px; }
-#s7 .s6-wn { font-size:18px; }
-#s7 .s6-wt { font-size:15px; }
-#s7 .s6-wctx { font-size:16px; }
-#s7 .s6-sec { font-size:13px; }
-#s7 .s6-cn { font-size:17px; }
-#s7 .s6-cr { font-size:15px; }
-#s7 .s6-cw { font-size:15px; }
-#s7 .s6-badge { font-size:13px; }
-#s7 .s6-warm { font-size:13px; }
+/* S7 font-size bumps so text reads clearly */
+#s7 .s6-subj { font-size:26px; }
+#s7 .s6-sn { font-size:20px; }
+#s7 .s6-se { font-size:19px; }
+#s7 .s6-st { font-size:19px; }
+#s7 .s6-wav { font-size:23px; }
+#s7 .s6-wn { font-size:22px; }
+#s7 .s6-wt { font-size:19px; }
+#s7 .s6-wctx { font-size:20px; }
+#s7 .s6-sec { font-size:17px; }
+#s7 .s6-cn { font-size:21px; }
+#s7 .s6-cr { font-size:19px; }
+#s7 .s6-cw { font-size:19px; }
+#s7 .s6-badge { font-size:17px; }
+#s7 .s6-warm { font-size:17px; }
 
 /* Card entrance -- slide from left (continuity from S6 scan) */
 @keyframes s7-card-enter {
@@ -490,23 +490,61 @@
 #s7.active .s6-card.d2 { animation:s7-card-enter 0.5s cubic-bezier(0.22,1,0.36,1) 0.35s backwards; }
 #s7.active .s6-card.d3 { animation:s7-card-enter 0.5s cubic-bezier(0.22,1,0.36,1) 0.5s backwards; }
 
-/* Ron B. emphasis -- camera zoom + Z-pan across card */
-@keyframes s7-camera-zoom {
-  0%   { transform:scale(1); }
-  100% { transform:scale(2); }
+/* S7 popup summary cards — pop out of email rows */
+.s7-popup {
+  position:absolute;
+  left:30px; right:30px;
+  background:#FFFDF8;
+  border:2px solid rgba(212,165,116,0.4);
+  border-radius:12px;
+  padding:14px 16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+  opacity:0;
+  transform:scale(0.7) translateY(10px);
+  transition:opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+             transform 0.5s cubic-bezier(0.22,1,0.36,1);
+  z-index:10;
+  pointer-events:none;
 }
-@keyframes s7-camera-zpan {
-  0%   { translate:0 0; }
-  20%  { translate:-30% -15%; }
-  50%  { translate:30% -15%; }
-  70%  { translate:-30% -25%; }
-  100% { translate:30% -25%; }
+.s7-popup.s7-pop-in {
+  opacity:1;
+  transform:scale(1) translateY(0);
 }
-#s7.active .s6-win {
-  transform-origin:50% 12%;
-  animation:s7-camera-zoom 0.8s cubic-bezier(0.25,1,0.5,1) 1.2s both,
-            s7-camera-zpan 4.0s linear 1.2s both;
+.s7-popup-arrow {
+  position:absolute;
+  left:40px;
+  top:-8px;
+  width:16px; height:16px;
+  background:#FFFDF8;
+  border-top:2px solid rgba(212,165,116,0.4);
+  border-left:2px solid rgba(212,165,116,0.4);
+  transform:rotate(45deg);
 }
+.s7-popup-name {
+  font-size:20px;
+  font-weight:800;
+  color:#202124;
+  margin-bottom:4px;
+}
+.s7-popup-name .g  { color:var(--gold); }
+.s7-popup-name .g2 { color:#B89040; }
+.s7-popup-label {
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  margin-bottom:6px;
+}
+.s7-popup-label.top  { color:var(--gold); }
+.s7-popup-label.good { color:#B89040; }
+.s7-popup-detail {
+  font-size:15px;
+  color:#555;
+  line-height:1.45;
+}
+.s7-popup-detail b { color:#202124; }
+#s7-pop-ron  { top:490px; }
+#s7-pop-sash { top:640px; }
 
 /* ---------------------------------------------
    == SCENES 8 + 9 -- TYPE C · Light Calendar
