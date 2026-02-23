@@ -7,16 +7,16 @@
   background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.28) 100%);
 }
 .s1-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-.s1-eye { font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#9A9690; margin-bottom:28px; }
-.s1-h { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:44px; color:#3A3830; line-height:1.35; max-width:620px; letter-spacing:-0.01em; }
-.s1-h .s1-seq { font-style:normal; font-family:'Manrope',sans-serif; font-weight:800; color:var(--gold); font-size:46px; letter-spacing:-0.02em; }
+.s1-eye { font-size:17px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#9A9690; margin-bottom:28px; }
+.s1-h { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:56px; color:#3A3830; line-height:1.35; max-width:620px; letter-spacing:-0.01em; }
+.s1-h .s1-seq { font-style:normal; font-family:'Manrope',sans-serif; font-weight:800; color:var(--gold); font-size:58px; letter-spacing:-0.02em; }
 .s1-rule { width:48px; height:1px; background:#A8A49C; margin:32px 0; }
-.s1-legend { display:flex; align-items:center; gap:0; font-family:'IBM Plex Serif',serif; font-style:italic; font-size:17px; }
+.s1-legend { display:flex; align-items:center; gap:0; font-family:'IBM Plex Serif',serif; font-style:italic; font-size:26px; }
 .s1-lgray { display:flex; align-items:center; gap:9px; color:#8A8680; }
 .s1-lgold { display:flex; align-items:center; gap:9px; color:rgba(212,165,116,0.65); }
 .s1-ldot-g { width:11px; height:11px; border-radius:50%; background:#9A9690; flex-shrink:0; }
 .s1-ldot-au { width:11px; height:11px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px rgba(212,165,116,0.5); flex-shrink:0; }
-.s1-lconn { font-style:normal; font-family:'Manrope',sans-serif; font-size:13px; font-weight:600; color:#7A7870; margin:0 16px; letter-spacing:0.04em; }
+.s1-lconn { font-style:normal; font-family:'Manrope',sans-serif; font-size:20px; font-weight:600; color:#7A7870; margin:0 16px; letter-spacing:0.04em; }
 
 /* ---------------------------------------------
    == SCENE 2 -- TYPE B · Light cal (full-width)
@@ -239,15 +239,15 @@
   opacity:0; pointer-events:none; z-index:10;
 }
 #s5.active::after { animation: s5-flash 1.2s ease-out forwards; }
-.s5-then { font-size:11px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:#282828; margin-bottom:22px; position:relative; z-index:1; }
-.s5-main { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:56px; color:#666; line-height:1.3; position:relative; z-index:1; }
-.s5-gordy { font-family:'Manrope',sans-serif; font-style:normal; font-weight:800; font-size:76px; color:var(--gold); letter-spacing:-0.03em; display:flex; align-items:center; justify-content:center; gap:13px; margin-top:8px; text-shadow:0 0 60px rgba(212,165,116,0.25); }
+.s5-then { font-size:17px; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:#282828; margin-bottom:22px; position:relative; z-index:1; }
+.s5-main { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:68px; color:#666; line-height:1.3; position:relative; z-index:1; }
+.s5-gordy { font-family:'Manrope',sans-serif; font-style:normal; font-weight:800; font-size:92px; color:var(--gold); letter-spacing:-0.03em; display:flex; align-items:center; justify-content:center; gap:13px; margin-top:8px; text-shadow:0 0 60px rgba(212,165,116,0.25); }
 .s5-gordy svg { flex-shrink:0; }
 .s5-rule { width:36px; height:1px; background:rgba(212,165,116,0.3); margin:36px auto 28px; position:relative; z-index:1; }
 .s5-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(212,165,116,0.08); border:1px solid rgba(212,165,116,0.2); border-radius:100px; padding:5px 14px; margin-bottom:12px; position:relative; z-index:1; }
 .s5-bd { width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 6px rgba(212,165,116,0.5); }
-.s5-bt { font-size:9px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:rgba(212,165,116,0.7); }
-.s5-sub { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:22px; line-height:1.6; max-width:580px; color:#555; position:relative; z-index:1; }
+.s5-bt { font-size:14px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:rgba(212,165,116,0.7); }
+.s5-sub { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:34px; line-height:1.5; max-width:620px; color:#555; position:relative; z-index:1; }
 
 /* ---------------------------------------------
    == SCENE 6 -- TYPE C · Network Scan
@@ -523,16 +523,16 @@
 .s8-num { font-size:160px; font-weight:800; letter-spacing:-0.04em; line-height:1; }
 .s8-num.gray { color:#1C1C1C; }
 .s8-num.gold { color:var(--gold); text-shadow:0 0 80px rgba(212,165,116,0.4), 0 0 160px rgba(212,165,116,0.15); }
-.s8-lbl { font-size:14px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-align:center; }
+.s8-lbl { font-size:21px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-align:center; }
 .s8-lbl.gray { color:#282828; }
 .s8-lbl.gold { color:rgba(212,165,116,0.65); }
 .s8-arrow { display:flex; flex-direction:column; align-items:center; gap:5px; }
 .s8-arr { font-size:44px; color:#1C1C1C; }
-.s8-ann { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:12px; color:#282828; white-space:nowrap; }
+.s8-ann { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:18px; color:#282828; white-space:nowrap; }
 .s8-rule { width:44px; height:1px; background:rgba(212,165,116,0.2); margin:30px 0; position:relative; z-index:1; }
 .s8-bottom { display:flex; flex-direction:column; align-items:center; gap:9px; position:relative; z-index:1; }
-.s8-main { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:26px; color:#444; line-height:1.5; }
-.s8-chain { display:flex; align-items:center; gap:7px; font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.s8-main { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:40px; color:#444; line-height:1.4; }
+.s8-chain { display:flex; align-items:center; gap:7px; font-size:18px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
 .s8-pill { background:#141414; border:1px solid #222; border-radius:100px; padding:4px 12px; color:#444; }
 .s8-pill.g { border-color:rgba(212,165,116,0.3); color:var(--gold); background:rgba(212,165,116,0.06); }
 .s8-sep { color:#1C1C1C; }
@@ -546,20 +546,20 @@
 .s9-glow { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%,rgba(212,165,116,0.06) 0%,transparent 50%); z-index:1; }
 .s9-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; z-index:2; }
 .s9-logo { display:flex; align-items:center; gap:13px; margin-bottom:28px; }
-.s9-wm { font-family:'Manrope',sans-serif; font-weight:800; font-size:52px; color:#FFF; letter-spacing:-0.02em; }
-.s9-tpri { font-family:'Manrope',sans-serif; font-weight:800; font-size:32px; color:#FFF; letter-spacing:-0.01em; line-height:1.3; margin-bottom:7px; }
-.s9-tsec { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:24px; color:#444; }
+.s9-wm { font-family:'Manrope',sans-serif; font-weight:800; font-size:64px; color:#FFF; letter-spacing:-0.02em; }
+.s9-tpri { font-family:'Manrope',sans-serif; font-weight:800; font-size:48px; color:#FFF; letter-spacing:-0.01em; line-height:1.3; margin-bottom:7px; }
+.s9-tsec { font-family:'IBM Plex Serif',serif; font-style:italic; font-size:36px; color:#444; }
 .s9-tsec .g { font-style:normal; font-weight:500; color:var(--gold); }
 .s9-rule { width:38px; height:1px; background:rgba(212,165,116,0.35); margin:28px 0; }
 .s9-ctas { display:flex; align-items:center; gap:18px; }
-.s9-cta { background:var(--gold); color:#0D0D0D; border-radius:100px; padding:14px 36px; font-size:13px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; }
-.s9-cta2 { font-size:15px; font-weight:600; color:#333; text-decoration:underline; text-decoration-color:#222; text-underline-offset:4px; }
-.s9-url { margin-top:40px; font-size:13px; font-weight:600; color:#222; letter-spacing:0.1em; text-transform:uppercase; }
+.s9-cta { background:var(--gold); color:#0D0D0D; border-radius:100px; padding:16px 42px; font-size:20px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; }
+.s9-cta2 { font-size:23px; font-weight:600; color:#333; text-decoration:underline; text-decoration-color:#222; text-underline-offset:4px; }
+.s9-url { margin-top:40px; font-size:20px; font-weight:600; color:#222; letter-spacing:0.1em; text-transform:uppercase; }
 .s9-corner { position:absolute; width:34px; height:34px; border-color:rgba(212,165,116,0.12); border-style:solid; z-index:2; }
 .s9-tl{top:28px;left:28px;border-width:1px 0 0 1px;} .s9-tr{top:28px;right:28px;border-width:1px 1px 0 0;}
 .s9-bl{bottom:28px;left:28px;border-width:0 0 1px 1px;} .s9-br{bottom:28px;right:28px;border-width:0 1px 1px 0;}
 .s9-footer { position:absolute; bottom:38px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:14px; z-index:3; }
-.s9-fi { display:flex; align-items:center; gap:5px; font-size:9px; font-weight:700; color:#1C1C1C; letter-spacing:0.08em; text-transform:uppercase; }
+.s9-fi { display:flex; align-items:center; gap:5px; font-size:14px; font-weight:700; color:#1C1C1C; letter-spacing:0.08em; text-transform:uppercase; }
 .s9-fd { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
 .s9-fd.gy{background:#222;} .s9-fd.wm{background:#5A3A18;} .s9-fd.au{background:var(--gold);box-shadow:0 0 5px rgba(212,165,116,0.5);}
 .s9-fi.gau { color:rgba(212,165,116,0.35); }
