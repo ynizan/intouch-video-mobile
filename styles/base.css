@@ -13,7 +13,7 @@
   --ink-faint: #9A9690;
 }
 body {
-  background:#080808;
+  background:#FFFFFF;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   min-height:100vh; font-family:'Manrope',sans-serif;
   overflow:hidden;
@@ -27,7 +27,7 @@ body {
 /* 1280x720 scene canvas, scales to window */
 #canvas {
   width:720px; height:1280px; position:relative; overflow:hidden;
-  transform-origin:top left; flex-shrink:0;
+  transform-origin:top center; flex-shrink:0;
   background:#111;
 }
 
@@ -194,7 +194,7 @@ body {
 --------------------------------------------- */
 #controls {
   background:#0D0D0D; border-top:1px solid #161616;
-  flex-shrink:0;
+  flex-shrink:0; margin:0 auto;
 }
 #progress-track {
   height:3px; background:#1A1A1A; cursor:pointer; position:relative;
@@ -269,6 +269,7 @@ body {
   width:100%; background:#000 !important; border-top:2px solid #D4A574;
   padding:0; overflow:hidden;
   max-height:0; transition:max-height 0.3s ease, padding 0.3s ease;
+  margin:0 auto;
 }
 #vo-bar.open { max-height:60px; padding:11px 20px 12px; }
 #vo-text {
