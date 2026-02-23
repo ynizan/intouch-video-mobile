@@ -65,10 +65,6 @@ function scale() {
   const W = Math.min(720, Math.round(720*s));
   controls.style.width = W+'px';
   voBar.style.width = W+'px';
-  const ml = Math.max(0, (vw-720*s)/2);
-  canvas.style.marginLeft = ml+'px';
-  controls.style.marginLeft = ml+'px';
-  voBar.style.marginLeft = ml+'px';
 }
 window.addEventListener('resize', scale);
 
