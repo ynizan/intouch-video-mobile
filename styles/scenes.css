@@ -463,8 +463,13 @@
 --------------------------------------------- */
 #s8, #s9 { background:#F6F8FC; }
 
-/* S9: old calendar hidden, new calendar starts in position (no swipe) */
-.s9-old-cal { display: none; }
+/* S9 week-swipe: old week slides out left, new week slides in from right */
+.s9-old-cal, .s9-new-cal {
+  transition: transform 0.55s cubic-bezier(0.22,1,0.36,1), opacity 0.55s ease;
+}
+.s9-new-cal { transform: translateX(105%); }
+.s9-old-cal.s9-swiped { transform: translateX(-105%); opacity:0.3; }
+.s9-new-cal.s9-swiped { transform: translateX(0); }
 
 /* S9 compact event pop-in */
 .s9-ev-anim {

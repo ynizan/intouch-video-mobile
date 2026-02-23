@@ -244,9 +244,16 @@ function tick(ts) {
     if(lastSceneIndex === 7 && si === 8 && s8El && s9El) {
       s8El.classList.add('no-fade');
       s9El.classList.add('no-fade');
+      // Make s9 narrator card appear instantly (no slide-up animation)
+      const s9Card = document.getElementById('s9-card');
+      if(s9Card) {
+        s9Card.style.transition = 'none';
+        s9Card.classList.add('nc-in');
+      }
       requestAnimationFrame(()=>requestAnimationFrame(()=>{
         s8El.classList.remove('no-fade');
         s9El.classList.remove('no-fade');
+        if(s9Card) s9Card.style.transition = '';
       }));
     }
     lastSceneIndex = si;
@@ -496,9 +503,17 @@ function renderS8(t) {
 }
 
 // ===============================================================
-// S9 -- RAPID EVENT FILL
+// S9 -- WEEK SWIPE + RAPID EVENT FILL
 // ===============================================================
 function renderS9(t) {
+  const oldCal = document.getElementById('s9-old');
+  const newCal = document.getElementById('s9-new');
+
+  // Swipe at 800ms: old week out left, new week in from right
+  const swiped = t >= 800;
+  if(oldCal) oldCal.classList.toggle('s9-swiped', swiped);
+  if(newCal) newCal.classList.toggle('s9-swiped', swiped);
+
   // Rapid event appearance on new calendar
   const evs = document.querySelectorAll('#s9-new .s9-ev-anim');
   let count = 0;
