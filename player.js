@@ -533,15 +533,24 @@ function renderS10(t) {
   const countStart = 0;
   const countEnd   = 1200;
 
+  let progress = 0;
   if(t < countStart) {
     counterEl.textContent = '0';
   } else if(t < countEnd) {
-    const p = (t - countStart) / (countEnd - countStart);
-    const count = Math.round(30 * easeOutQuad(p));
+    progress = (t - countStart) / (countEnd - countStart);
+    const count = Math.round(30 * easeOutQuad(progress));
     counterEl.textContent = count;
   } else {
     counterEl.textContent = '30';
+    progress = 1;
   }
+
+  // Label words fade in gradually as counter counts up
+  const labelOpacity = easeOutQuad(progress);
+  ['s10w8','s10w9','s10w11'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.opacity = labelOpacity;
+  });
 }
 
 function easeOutQuad(t) { return t * (2 - t); }
