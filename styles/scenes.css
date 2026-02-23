@@ -195,7 +195,7 @@
 #s4 { background:#E8E4DC; display:flex; align-items:center; justify-content:center; }
 .s4-zoom-wrap {
   position:absolute; inset:0;
-  transform-origin:50% 65%;
+  transform-origin:50% 38%;
   will-change:transform;
 }
 .s4-win { width:660px; background:#FDFBF8; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.12); overflow:hidden; position:relative; min-height:620px; display:flex; flex-direction:column; }
