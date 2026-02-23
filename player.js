@@ -545,7 +545,7 @@ function renderS10(t) {
 
   // Counter starts immediately and reaches 30 to sync with VO "thirty"
   const countStart = 0;
-  const countEnd   = 1200;
+  const countEnd   = 1700;
 
   let progress = 0;
   if(t < countStart) {
