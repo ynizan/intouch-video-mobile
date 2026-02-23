@@ -533,15 +533,21 @@ function renderS10(t) {
   const countStart = 0;
   const countEnd   = 1200;
 
+  let progress = 0;
   if(t < countStart) {
     counterEl.textContent = '0';
   } else if(t < countEnd) {
-    const p = (t - countStart) / (countEnd - countStart);
-    const count = Math.round(30 * easeOutQuad(p));
+    progress = (t - countStart) / (countEnd - countStart);
+    const count = Math.round(30 * easeOutQuad(progress));
     counterEl.textContent = count;
   } else {
     counterEl.textContent = '30';
+    progress = 1;
   }
+
+  // Pill-chain labels fade in gradually as counter counts up
+  const chainEl = document.getElementById('s10-chain');
+  if(chainEl) chainEl.style.opacity = easeOutQuad(progress);
 }
 
 function easeOutQuad(t) { return t * (2 - t); }
