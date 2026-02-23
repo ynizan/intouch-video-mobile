@@ -26,7 +26,7 @@ body {
 
 /* 1280x720 scene canvas, scales to window */
 #canvas {
-  width:1280px; height:720px; position:relative; overflow:hidden;
+  width:720px; height:1280px; position:relative; overflow:hidden;
   transform-origin:top left; flex-shrink:0;
   background:#111;
 }
@@ -97,10 +97,11 @@ body {
 --------------------------------------------- */
 .narrator-card {
   position:absolute; bottom:0; left:0; right:0;
+  min-height:340px; display:flex; flex-direction:column; justify-content:center;
   background:rgba(10,10,10,0.82);
   backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
   border-top:1px solid rgba(212,165,116,0.18);
-  padding:14px 24px 16px;
+  padding:28px 36px 36px;
   z-index:20;
   transform:translateY(100%); opacity:0;
   transition:transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
@@ -112,11 +113,11 @@ body {
   margin-bottom:8px;
 }
 .nc-pulse {
-  width:6px; height:6px; border-radius:50%;
+  width:8px; height:8px; border-radius:50%;
   background:var(--gold); box-shadow:0 0 7px rgba(212,165,116,0.6);
   flex-shrink:0;
 }
-.nc-label { font-size:9px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:rgba(212,165,116,0.55); }
+.nc-label { font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:rgba(212,165,116,0.55); }
 /* Override phrase styles inside narrator bar */
 .narrator-card .phrase {
   margin-bottom:0; padding:0; border-left:none; border-radius:0;
@@ -126,11 +127,11 @@ body {
 .narrator-card .phrase:not(.active) { display:none; }
 .narrator-card .phrase-eye { display:none; }
 .narrator-card .phrase-txt {
-  font-size:22px; line-height:1.5; color:rgba(255,255,255,0.92);
+  font-size:28px; line-height:1.5; color:rgba(255,255,255,0.92);
 }
 .narrator-card .phrase-txt b  { color:#fff; }
 .narrator-card .phrase-txt em { color:#fff; }
-.narrator-card .phrase-txt .g { color:var(--gold); font-size:22px; }
+.narrator-card .phrase-txt .g { color:var(--gold); font-size:28px; }
 
 /* ---------------------------------------------
    SHARED UI BITS
@@ -203,7 +204,7 @@ body {
 .s-mark { position:absolute; top:0; bottom:0; width:1px; background:#2A2A2A; }
 
 #ctrl-row {
-  display:flex; align-items:center; padding:10px 20px; gap:14px;
+  display:flex; align-items:center; padding:8px 12px; gap:10px;
 }
 .cbtn {
   width:32px; height:32px; border-radius:50%;
@@ -245,7 +246,7 @@ body {
 }
 #thumb-strip::-webkit-scrollbar { display:none; }
 .thumb {
-  flex-shrink:0; width:80px; height:46px;
+  flex-shrink:0; width:36px; height:64px;
   border-radius:3px; border:1.5px solid #1A1A1A;
   cursor:pointer; overflow:hidden; position:relative;
   transition:border-color 0.15s;
