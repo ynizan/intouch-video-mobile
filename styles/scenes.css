@@ -521,7 +521,7 @@
   transform:rotate(45deg);
 }
 .s7-popup-name {
-  font-size:20px;
+  font-size:26px;
   font-weight:800;
   color:#202124;
   margin-bottom:4px;
@@ -529,7 +529,7 @@
 .s7-popup-name .g  { color:var(--gold); }
 .s7-popup-name .g2 { color:#B89040; }
 .s7-popup-label {
-  font-size:13px;
+  font-size:19px;
   font-weight:700;
   text-transform:uppercase;
   letter-spacing:0.06em;
@@ -538,7 +538,7 @@
 .s7-popup-label.top  { color:var(--gold); }
 .s7-popup-label.good { color:#B89040; }
 .s7-popup-detail {
-  font-size:15px;
+  font-size:21px;
   color:#555;
   line-height:1.45;
 }
