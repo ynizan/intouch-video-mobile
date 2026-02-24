@@ -354,9 +354,9 @@ function toggleVO() {
 // ===============================================================
 function renderS6(t) {
   // Timeline:
-  //   0-4600      Phase 1: LinkedIn window visible, gentle scan starts
-  //   4600-8400   Phase 2: Active scanning, big text "Looking for strategic intros", counter runs 0->350
-  //   8400-12360  Phase 3: Big text "Evaluating who will respond to Jake", counter 350->500, results appear
+  //   0-5100      Phase 1: LinkedIn window visible, gentle scan starts
+  //   5100-8900   Phase 2: Active scanning, big text "Looking for strategic intros", counter runs 0->350
+  //   8900-12860  Phase 3: Big text "Evaluating who will respond to Jake", counter 350->500, results appear
 
   const counterEl   = document.getElementById('s6-counter');
   const progressEl  = document.getElementById('s6-progress-fill');
@@ -371,16 +371,16 @@ function renderS6(t) {
 
   // --- Counter ---
   let count = 0;
-  if(t < 4600) {
+  if(t < 5100) {
     // Phase 1: no counting yet
     count = 0;
-  } else if(t < 8400) {
+  } else if(t < 8900) {
     // Phase 2: 0 -> 350
-    const p = (t - 4600) / (8400 - 4600);
+    const p = (t - 5100) / (8900 - 5100);
     count = Math.round(350 * easeOutQuad(p));
-  } else if(t < 12360) {
+  } else if(t < 12860) {
     // Phase 3: 350 -> 500
-    const p = (t - 8400) / (12360 - 8400);
+    const p = (t - 8900) / (12860 - 8900);
     count = 350 + Math.round(150 * easeOutQuad(p));
   } else {
     count = 500;
@@ -389,10 +389,10 @@ function renderS6(t) {
   progressEl.style.width = (count / 500 * 100) + '%';
 
   // --- Scan line ---
-  if(t >= 4600 && t < 12000) {
+  if(t >= 5100 && t < 12500) {
     scanLine.classList.add('active');
     // Oscillate scan line position through the connection rows
-    const cycle = ((t - 4600) % 2000) / 2000;
+    const cycle = ((t - 5100) % 2000) / 2000;
     const rowCount = 8;
     const rowH = 44; // approximate row height
     const topOffset = 36; // header height
@@ -420,20 +420,20 @@ function renderS6(t) {
   });
 
   // --- Big text overlays ---
-  if(t >= 4600 && t < 8200) {
+  if(t >= 5100 && t < 8700) {
     bigtext0.classList.add('visible');
     bigtext0.classList.remove('exit');
-  } else if(t >= 8200 && t < 8600) {
+  } else if(t >= 8700 && t < 9100) {
     bigtext0.classList.remove('visible');
     bigtext0.classList.add('exit');
   } else {
     bigtext0.classList.remove('visible','exit');
   }
 
-  if(t >= 8600 && t < 11300) {
+  if(t >= 9100 && t < 11800) {
     bigtext1.classList.add('visible');
     bigtext1.classList.remove('exit');
-  } else if(t >= 11300 && t < 11800) {
+  } else if(t >= 11800 && t < 12300) {
     bigtext1.classList.remove('visible');
     bigtext1.classList.add('exit');
   } else {
@@ -444,12 +444,12 @@ function renderS6(t) {
   const res0 = document.getElementById('s6-res0');
   const res1 = document.getElementById('s6-res1');
   const res2 = document.getElementById('s6-res2');
-  if(res0) res0.classList.toggle('visible', t >= 9200);
-  if(res1) res1.classList.toggle('visible', t >= 10200);
-  if(res2) res2.classList.toggle('visible', t >= 11200);
+  if(res0) res0.classList.toggle('visible', t >= 9700);
+  if(res1) res1.classList.toggle('visible', t >= 10700);
+  if(res2) res2.classList.toggle('visible', t >= 11700);
 
   // --- Filtered note ---
-  if(filteredEl) filteredEl.style.opacity = t >= 11800 ? '1' : '0';
+  if(filteredEl) filteredEl.style.opacity = t >= 12300 ? '1' : '0';
 
   // --- Status badge ---
   if(count >= 500) {
