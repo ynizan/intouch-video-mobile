@@ -187,6 +187,9 @@ function render() {
     }
   }
 
+  // S7 custom animations -- popup summary cards
+  if(sc.id === 's7') renderS7(scElapsed);
+
   // S6 custom animations -- counter, scan line, big text, results
   if(sc.id === 's6') renderS6(scElapsed);
 
@@ -465,6 +468,16 @@ function renderS6(t) {
     statusBadge.style.animation = 'none';
     if(scanStatus) scanStatus.innerHTML = '&#9679; Ready';
   }
+}
+
+// ===============================================================
+// S7 -- POPUP SUMMARY CARDS
+// ===============================================================
+function renderS7(t) {
+  const ron  = document.getElementById('s7-pop-ron');
+  const sash = document.getElementById('s7-pop-sash');
+  if(ron)  ron.classList.toggle('s7-pop-in',  t >= 1800);
+  if(sash) sash.classList.toggle('s7-pop-in', t >= 3800);
 }
 
 // ===============================================================
