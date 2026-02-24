@@ -117,7 +117,6 @@ body {
   background:var(--gold); box-shadow:0 0 7px rgba(212,165,116,0.6);
   flex-shrink:0;
 }
-.nc-label { font-size:17px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:rgba(212,165,116,0.55); }
 /* Override phrase styles inside narrator bar */
 .narrator-card .phrase {
   margin-bottom:0; padding:0; border-left:none; border-radius:0;

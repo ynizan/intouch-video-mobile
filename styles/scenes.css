@@ -109,7 +109,6 @@
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   border-top:1px solid rgba(212,165,116,0.28);
 }
-#s2-card .nc-label { color:rgba(212,165,116,0.75); }
 #s2-card .phrase-txt {
   color:var(--ink-light);
 }
@@ -410,7 +409,6 @@
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   border-top:1px solid rgba(212,165,116,0.28);
 }
-#s6-card .nc-label { color:rgba(212,165,116,0.75); }
 #s6-card .phrase-txt {
   color:var(--ink-light);
 }
